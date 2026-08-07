@@ -60,6 +60,7 @@
         </form>
       </section>
       <a href=""></a>
+      <a href="#dailyHeader">Skip to Current Weather</a>
 
       <section aria-labelledby="currentHeader" class="my-6">
         <h2 id="currentHeader" class="absolute -left-10000">
@@ -82,107 +83,157 @@
           </div>
         </section>
 
-        <section id="currentDetails" class="flex flex-wrap gap-4">
-          <div
-            class="bg-neutral-700 border flex flex-col justify-between border-solid border-slate-400 rounded-lg p-6 h-30 w-40"
-          >
+        <section id="currentWeather__details" class="flex flex-wrap gap-4">
+          <div class="current-card">
             <div>Feels Like</div>
             <div class="text-2xl">64°</div>
           </div>
-          <div
-            class="bg-neutral-700 border flex flex-col justify-between border-solid border-slate-400 rounded-lg p-6 h-30 w-40"
-          >
+          <div class="current-card">
             <div>Humidity</div>
             <div class="text-2xl">46%</div>
           </div>
-          <div
-            class="bg-neutral-700 border flex flex-col justify-between border-solid border-slate-400 rounded-lg p-6 h-30 w-40"
-          >
+          <div class="current-card">
             <div>Wind</div>
             <div class="text-2xl">9 mph</div>
           </div>
-          <div
-            class="bg-neutral-700 border flex flex-col justify-between border-solid border-slate-400 rounded-lg p-6 h-30 w-40"
-          >
+          <div class="current-card">
             <div>Percipitation</div>
             <div class="text-2xl">0 in</div>
           </div>
         </section>
       </section>
-
-      <section>
-        <h2 class="mb-4">Daily Forecast</h2>
+      <a href="#dailyHeader">Skip to Daily Forecast</a>
+      <section aria-labelledby="dailyHeader">
+        <h2 class="mb-4" id="dailyHeader">Daily Forecast</h2>
         <div class="flex flex-wrap gap-4">
-          <div
-            class="w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center"
-          >
+          <div class="daily-card">
             <div>Tue</div>
             <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
-            <div class="flex justify-between w-full">
+            <div class="temp">
               <div>68°</div>
               <div>57°</div>
             </div>
           </div>
-          <div
-            class="w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center"
-          >
+          <div class="daily-card">
             <div>Tue</div>
             <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
-            <div class="flex justify-between w-full">
+            <div class="temp">
               <div>68°</div>
               <div>57°</div>
             </div>
           </div>
-          <div
-            class="w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center"
-          >
+          <div class="daily-card">
             <div>Tue</div>
             <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
-            <div class="flex justify-between w-full">
+            <div class="temp">
               <div>68°</div>
               <div>57°</div>
             </div>
           </div>
-          <div
-            class="w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center"
-          >
+          <div class="daily-card">
             <div>Tue</div>
             <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
-            <div class="flex justify-between w-full">
+            <div class="temp">
               <div>68°</div>
               <div>57°</div>
             </div>
           </div>
-          <div
-            class="w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center"
-          >
+          <div class="daily-card">
             <div>Tue</div>
             <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
-            <div class="flex justify-between w-full">
+            <div class="temp">
               <div>68°</div>
               <div>57°</div>
             </div>
           </div>
-          <div
-            class="w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center"
-          >
+          <div class="daily-card">
             <div>Tue</div>
             <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
-            <div class="flex justify-between w-full">
+            <div class="temp">
               <div>68°</div>
               <div>57°</div>
             </div>
           </div>
-          <div
-            class="w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center"
-          >
+          <div class="daily-card">
             <div>Tue</div>
             <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
-            <div class="flex justify-between w-full">
+            <div class="temp">
               <div>68°</div>
               <div>57°</div>
             </div>
           </div>
+        </div>
+      </section>
+      <a href="#hourlyWeather">Skip to Hourly Forecast</a>
+      <section
+        class="my-6 bg-neutral-800 p-4 rounded-lg"
+        aria-labelledby="hourlyHeader"
+      >
+        <div class="flex w-full justify-between items-center">
+          <h2 id="hourlyHeader">Hourly Forecast</h2>
+          <button
+            class="flex bg-neutral-600 p-2 rounded-lg justify-evenly w-30"
+          >
+            <span>Tuesday</span
+            ><img src="images/icon-dropdown.svg" width="13" height="8" alt="" />
+          </button>
+        </div>
+
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
+        </div>
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
+        </div>
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
+        </div>
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
+        </div>
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
+        </div>
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
+        </div>
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
+        </div>
+        <div class="hourly-card">
+          <div class="icon-time">
+            <img src="images/icon-fog.webp" class="w-10" alt="" />
+            <div>3 PM</div>
+          </div>
+          <div>68°</div>
         </div>
       </section>
     </main>
