@@ -12,7 +12,7 @@
 }
 
 .hourly-card {
-  @apply flex items-center justify-between my-4 p-2 bg-neutral-600 rounded-lg;
+  @apply flex items-center justify-between my-4 p-2 bg-neutral-700 rounded-lg border border-solid border-neutral-600;
   & > .icon-time {
     @apply w-25 flex items-center;
   }

@@ -8,12 +8,16 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-700: oklch(50.5% 0.213 27.518);
+    --color-blue-500: oklch(62.3% 0.214 259.815);
+    --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-blue-900: oklch(37.9% 0.146 265.522);
     --color-slate-400: oklch(70.4% 0.04 256.788);
     --color-neutral-600: oklch(43.9% 0 none);
     --color-neutral-700: oklch(37.1% 0 none);
     --color-neutral-800: oklch(26.9% 0 none);
     --color-neutral-900: oklch(20.5% 0 none);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-2xl: 1.5rem;
@@ -288,9 +292,6 @@
   .max-w-322 {
     max-width: calc(var(--spacing) * 322);
   }
-  .max-w-322\.5 {
-    max-width: calc(var(--spacing) * 322.5);
-  }
   .min-w-12 {
     min-width: calc(var(--spacing) * 12);
   }
@@ -349,6 +350,9 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .bg-blue-700 {
+    background-color: var(--color-blue-700);
+  }
   .bg-blue-900 {
     background-color: var(--color-blue-900);
   }
@@ -363,6 +367,9 @@
   }
   .bg-neutral-900 {
     background-color: var(--color-neutral-900);
+  }
+  .bg-red-700 {
+    background-color: var(--color-red-700);
   }
   .bg-\[url\(\.\.\/images\/bg-today-small\.svg\)\] {
     background-image: url(../images/bg-today-small.svg);
@@ -435,6 +442,57 @@
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .focus-within\:border-white:focus-within {
+    border-color: var(--color-white);
+  }
+  .focus-within\:outline-1:focus-within {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .focus-within\:outline-white:focus-within {
+    outline-color: var(--color-white);
+  }
+  @media (hover: hover) {
+    .hover\:cursor-pointer:hover {
+      cursor: pointer;
+    }
+  }
+  .focus\:outline:focus {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .focus\:outline-1:focus {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .focus\:outline-4:focus {
+    outline-style: var(--tw-outline-style);
+    outline-width: 4px;
+  }
+  .focus\:outline-8:focus {
+    outline-style: var(--tw-outline-style);
+    outline-width: 8px;
+  }
+  .focus\:outline-black:focus {
+    outline-color: var(--color-black);
+  }
+  .focus\:outline-blue-500:focus {
+    outline-color: var(--color-blue-500);
+  }
+  .focus\:outline-blue-700:focus {
+    outline-color: var(--color-blue-700);
+  }
+  .focus\:outline-white:focus {
+    outline-color: var(--color-white);
+  }
+  .focus\:brightness-150:focus {
+    --tw-brightness: brightness(150%);
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .focus\:outline-none:focus {
+    --tw-outline-style: none;
+    outline-style: none;
   }
   @media (width >= 48rem) {
     .md\:w-55 {
@@ -511,7 +569,12 @@
   align-items: center;
   justify-content: space-between;
   border-radius: var(--radius-lg);
-  background-color: var(--color-neutral-600);
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  --tw-border-style: solid;
+  border-style: solid;
+  border-color: var(--color-neutral-600);
+  background-color: var(--color-neutral-700);
   padding: calc(var(--spacing) * 2);
   & > .icon-time {
     display: flex;

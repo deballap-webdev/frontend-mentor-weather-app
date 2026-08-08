@@ -18,7 +18,8 @@
       />
 
       <button
-        class="flex bg-neutral-800 w-25 justify-evenly items-center rounded-lg"
+        tabindex="1"
+        class="flex bg-neutral-800 w-25 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white"
         id="toggleUnit"
         aria-label="toogle between imperial and metric units"
       >
@@ -35,7 +36,8 @@
           id="searchForm"
         >
           <div
-            class="bg-neutral-700 rounded-lg flex items-center 570:grow px-4 w-[min(100%,400px)] lg:w-135 min-h-48px"
+            class="bg-neutral-700 rounded-lg flex items-center 570:grow px-4 w-[min(100%,400px)] lg:w-135 min-h-48px focus-within:outline-white focus-within:outline-1"
+            tabindex="1"
           >
             <img
               src="images/icon-search.svg"
@@ -48,13 +50,14 @@
             <input
               type="text"
               placeholder="Search for a place..."
-              class="w-[calc(100%-45px)] py-3"
+              class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
               id="searchInput"
             />
           </div>
 
           <button
-            class="bg-blue-900 py-2 px-4 570:grow rounded-lg w-30 min-w-12 min-h-12"
+            tabindex="1"
+            class="bg-blue-900 py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1"
             aria-label="submit location search"
             title="search-button"
             tabindex="1"
@@ -193,7 +196,8 @@
           <div class="flex w-full justify-between items-center">
             <h2 id="hourlyHeader">Hourly Forecast</h2>
             <button
-              class="flex bg-neutral-600 p-2 rounded-lg justify-evenly w-30"
+              tabindex="1"
+              class="flex bg-neutral-600 p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
             >
               <span>Tuesday</span
               ><img
