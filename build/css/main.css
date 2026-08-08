@@ -26,6 +26,7 @@
     --text-7xl--line-height: 1;
     --font-weight-bold: 700;
     --radius-lg: 0.5rem;
+    --radius-3xl: 1.5rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -185,17 +186,17 @@
   .-left-10000 {
     left: calc(var(--spacing) * -10000);
   }
+  .-left-100000 {
+    left: calc(var(--spacing) * -100000);
+  }
   .mx-auto {
     margin-inline: auto;
   }
-  .my-4 {
-    margin-block: calc(var(--spacing) * 4);
-  }
-  .my-6 {
-    margin-block: calc(var(--spacing) * 6);
-  }
   .my-12 {
     margin-block: calc(var(--spacing) * 12);
+  }
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
   }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
@@ -203,8 +204,14 @@
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
   .flex {
     display: flex;
+  }
+  .table {
+    display: table;
   }
   .h-2 {
     height: calc(var(--spacing) * 2);
@@ -212,20 +219,38 @@
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
   .h-5\.25 {
     height: calc(var(--spacing) * 5.25);
+  }
+  .h-71 {
+    height: calc(var(--spacing) * 71);
   }
   .h-71\.5 {
     height: calc(var(--spacing) * 71.5);
   }
+  .h-fit {
+    height: fit-content;
+  }
+  .min-h-12 {
+    min-height: calc(var(--spacing) * 12);
+  }
   .min-h-screen {
     min-height: 100vh;
+  }
+  .w-3 {
+    width: calc(var(--spacing) * 3);
   }
   .w-3\.25 {
     width: calc(var(--spacing) * 3.25);
   }
   .w-4 {
     width: calc(var(--spacing) * 4);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
   }
   .w-5\.25 {
     width: calc(var(--spacing) * 5.25);
@@ -239,8 +264,17 @@
   .w-30 {
     width: calc(var(--spacing) * 30);
   }
-  .w-\[max\(200px\,60\%\)\] {
-    width: max(200px, 60%);
+  .w-\[calc\(100\%-45px\)\] {
+    width: calc(100% - 45px);
+  }
+  .w-\[min\(100\%\,400px\)\] {
+    width: min(100%, 400px);
+  }
+  .w-\[min\(100\%\,600px\)\] {
+    width: min(100%, 600px);
+  }
+  .w-\[min\(100\%\,1250px\)\] {
+    width: min(100%, 1250px);
   }
   .w-fit {
     width: fit-content;
@@ -248,14 +282,41 @@
   .w-full {
     width: 100%;
   }
+  .max-w-200 {
+    max-width: calc(var(--spacing) * 200);
+  }
+  .max-w-322 {
+    max-width: calc(var(--spacing) * 322);
+  }
+  .max-w-322\.5 {
+    max-width: calc(var(--spacing) * 322.5);
+  }
+  .min-w-12 {
+    min-width: calc(var(--spacing) * 12);
+  }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
   .shrink {
     flex-shrink: 1;
+  }
+  .flex-grow {
+    flex-grow: 1;
   }
   .grow {
     flex-grow: 1;
   }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .resize {
+    resize: both;
+  }
   .flex-col {
     flex-direction: column;
+  }
+  .flex-row {
+    flex-direction: row;
   }
   .flex-wrap {
     flex-wrap: wrap;
@@ -266,17 +327,27 @@
   .justify-between {
     justify-content: space-between;
   }
+  .justify-center {
+    justify-content: center;
+  }
   .justify-evenly {
     justify-content: space-evenly;
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
-  .gap-5 {
-    gap: calc(var(--spacing) * 5);
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
+  }
+  .rounded-3xl {
+    border-radius: var(--radius-3xl);
   }
   .rounded-lg {
     border-radius: var(--radius-lg);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
   }
   .bg-blue-900 {
     background-color: var(--color-blue-900);
@@ -296,11 +367,23 @@
   .bg-\[url\(\.\.\/images\/bg-today-small\.svg\)\] {
     background-image: url(../images/bg-today-small.svg);
   }
+  .bg-cover {
+    background-size: cover;
+  }
+  .bg-center {
+    background-position: center;
+  }
+  .bg-no-repeat {
+    background-repeat: no-repeat;
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
   }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
@@ -343,11 +426,51 @@
   .italic {
     font-style: italic;
   }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
+  @media (width >= 48rem) {
+    .md\:w-55 {
+      width: calc(var(--spacing) * 55);
+    }
+    .md\:max-w-200 {
+      max-width: calc(var(--spacing) * 200);
+    }
+    .md\:bg-\[url\(\.\.\/images\/bg-today-large\.svg\)\] {
+      background-image: url(../images/bg-today-large.svg);
+    }
+    .md\:p-8 {
+      padding: calc(var(--spacing) * 8);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:w-135 {
+      width: calc(var(--spacing) * 135);
+    }
+    .lg\:w-175 {
+      width: calc(var(--spacing) * 175);
+    }
+  }
+  @media screen and (width <= 570px) {
+    .\35 70\:grow {
+      flex-grow: 1;
+    }
+  }
+  @media screen and (width < 1290px) {
+    .\31 290\:w-\[min\(100\%\,800px\)\] {
+      width: min(100%, 800px);
+    }
+  }
 }
 .current-card {
+  margin-top: calc(var(--spacing) * 2);
   display: flex;
   height: calc(var(--spacing) * 30);
   width: calc(var(--spacing) * 40);
@@ -361,6 +484,9 @@
   border-color: var(--color-slate-400);
   background-color: var(--color-neutral-700);
   padding: calc(var(--spacing) * 6);
+  @media (width >= 48rem) {
+    width: calc(var(--spacing) * 47);
+  }
 }
 .daily-card {
   display: flex;
@@ -393,9 +519,19 @@
     align-items: center;
   }
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
 @property --tw-blur {
   syntax: "*";
@@ -450,15 +586,12 @@
   syntax: "*";
   inherits: false;
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-border-style: solid;
       --tw-font-weight: initial;
+      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
@@ -472,7 +605,6 @@
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
-      --tw-border-style: solid;
     }
   }
 }

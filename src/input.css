@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .current-card {
-  @apply bg-neutral-700 border flex flex-col justify-between border-solid border-slate-400 rounded-lg p-6 h-30 w-40;
+  @apply bg-neutral-700 border flex flex-col justify-between border-solid border-slate-400 rounded-lg p-6 h-30 w-40 md:w-47 mt-2;
 }
 
 .daily-card {
@@ -15,5 +15,17 @@
   @apply flex items-center justify-between my-4 p-2 bg-neutral-600 rounded-lg;
   & > .icon-time {
     @apply w-25 flex items-center;
+  }
+}
+
+@custom-variant 570 {
+  @media screen and (width <= 570px) {
+    @slot;
+  }
+}
+
+@custom-variant 1290 {
+  @media screen and (width < 1290px) {
+    @slot;
   }
 }
