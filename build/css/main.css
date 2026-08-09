@@ -15,10 +15,6 @@
     --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: calc(2.5 / 2.25);
-    --text-5xl: 3rem;
-    --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
     --text-7xl: 4.5rem;
@@ -35,7 +31,7 @@
     --color-LIGHT-BGCOLOR: rgb(47, 47, 73);
     --color-BORDER-COLOR: rgb(36, 35, 67);
     --color-LIGHT-BORDER-COLOR: rgb(60, 60, 90);
-    --color-FADED-COlOR: rgb(132, 134, 154);
+    --color-FADED-COLOR: rgb(132, 134, 154);
     --text-FS: 18px;
     --font-HEADER-FONT: "Bricolage Grotesque", sans-serif;
     --font-FONT-FAM: "DM Sans", sans-serif;
@@ -226,6 +222,9 @@
   .flex {
     display: flex;
   }
+  .hidden {
+    display: none;
+  }
   .table {
     display: table;
   }
@@ -312,6 +311,9 @@
   }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .rotate-180 {
+    rotate: 180deg;
   }
   .resize {
     resize: both;
@@ -421,14 +423,6 @@
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
-  .text-4xl {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
-  }
-  .text-5xl {
-    font-size: var(--text-5xl);
-    line-height: var(--tw-leading, var(--text-5xl--line-height));
-  }
   .text-6xl {
     font-size: var(--text-6xl);
     line-height: var(--tw-leading, var(--text-6xl--line-height));
@@ -440,10 +434,6 @@
   .text-FS {
     font-size: var(--text-FS);
   }
-  .font-\[600\] {
-    --tw-font-weight: 600;
-    font-weight: 600;
-  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -451,9 +441,6 @@
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
-  }
-  .text-\[600\] {
-    color: 600;
   }
   .text-white {
     color: var(--color-white);
@@ -610,7 +597,6 @@
   position: absolute;
   top: calc(var(--spacing) * 15);
   z-index: 10;
-  display: none;
   width: calc(var(--spacing) * 60);
   flex-direction: column;
   border-radius: var(--radius-lg);
@@ -643,14 +629,13 @@
     border-top-width: 1px;
     border-top-color: var(--color-LIGHT-BORDER-COLOR);
     padding: calc(var(--spacing) * 2);
-    color: var(--color-FADED-COlOR);
+    color: var(--color-FADED-COLOR);
   }
 }
 .days-drop-down {
   position: absolute;
   top: calc(var(--spacing) * 13);
   z-index: 10;
-  display: none;
   width: calc(var(--spacing) * 60);
   flex-direction: column;
   border-radius: var(--radius-lg);

@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="min-h-screen h-fit w-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="images/favicon-32x32.png" />
+    <script src="js/main.js" type="module"></script>
     <title>front-end mentor's weather app challenge</title>
   </head>
   <body
@@ -34,12 +35,13 @@
           <span>Units</span>
           <img
             src="images/icon-dropdown.svg"
+            data-dropDown="true"
             alt=""
             class="shrink w-3.25 h-2"
           />
         </button>
 
-        <div class="units-drop-down" aria-expanded="false">
+        <div class="units-drop-down hidden" aria-expanded="false">
           <button class="unit">Switch to imperial</button>
           <div class="header">Temperature</div>
           <button class="unit">Celsuis (C)</button>
@@ -237,17 +239,19 @@
                 class="flex bg-LIGHT-BORDER-COLOR p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
                 title="Days Drop Down"
                 aria-label="Select a day from monday to sunday to view the hourly forecast for that day"
+                id="chooseDay"
               >
                 <span>Tuesday</span
                 ><img
                   src="images/icon-dropdown.svg"
+                  data-dropDown="true"
                   width="13"
                   height="8"
                   alt=""
                 />
               </button>
 
-              <div class="days-drop-down" aria-expanded="false">
+              <div class="days-drop-down hidden" aria-expanded="false">
                 <button class="day">Monday</button>
                 <button class="day">Tuesday</button>
                 <button class="day">Wednesday</button>
