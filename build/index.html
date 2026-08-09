@@ -9,24 +9,46 @@
   <body
     class="bg-neutral-900 text-white p-4 w-full min-h-screen h-fit text-[1.125rem] md:p-8"
   >
-    <header class="flex justify-between max-w-322 mx-auto">
+    <header class="flex justify-between items-start max-w-322 mx-auto">
       <img
         src="images/logo.svg"
         alt="Weather Now Logo"
         width="197"
         height="40"
       />
+      <div class="flex items-end flex-col relative">
+        <button
+          tabindex="1"
+          class="flex bg-neutral-800 w-30 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white min-w-12 min-h-12"
+          id="toggleUnit"
+          aria-label="toogle between imperial and metric units"
+          title="Units Toogle"
+        >
+          <img src="images/icon-units.svg" alt="" class="shrink w-4 h-4" />
+          <span>Units</span>
+          <img
+            src="images/icon-dropdown.svg"
+            alt=""
+            class="shrink w-3.25 h-2"
+          />
+        </button>
 
-      <button
-        tabindex="1"
-        class="flex bg-neutral-800 w-25 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white"
-        id="toggleUnit"
-        aria-label="toogle between imperial and metric units"
-      >
-        <img src="images/icon-units.svg" alt="" class="shrink w-4 h-4" />
-        <span>Units</span>
-        <img src="images/icon-dropdown.svg" alt="" class="shrink w-3.25 h-2" />
-      </button>
+        <div class="units-drop-down" aria-expanded="false">
+          <button tabindex="1" class="unit">Switch to imperial</button>
+          <div class="header">Temperature</div>
+          <button tabindex="1" class="unit">Celsuis (C)</button>
+          <button tabindex="1" class="unit">
+            Fahrenheit (F)
+            <img src="images/icon-checkmark.svg" alt="" />
+          </button>
+          <div class="header">Wind Speed</div>
+          <button tabindex="1" class="unit">km/h</button>
+          <button tabindex="1" class="unit">mp/h</button>
+          <div class="header">Percipitation</div>
+          <button tabindex="1" class="unit">Millimeters (mm)</button>
+          <button tabindex="1" class="unit">Inches (in)</button>
+        </div>
+      </div>
     </header>
     <main class="flex justify-center items-center flex-col">
       <h1 class="text-4xl my-12 text-center">How's the Sky Looking today?</h1>
@@ -52,6 +74,7 @@
               placeholder="Search for a place..."
               class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
               id="searchInput"
+              autocomplete="off"
             />
           </div>
 
@@ -59,7 +82,7 @@
             tabindex="1"
             class="bg-blue-900 py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1"
             aria-label="submit location search"
-            title="search-button"
+            title="Search Button"
             tabindex="1"
             type="submit"
           >
@@ -128,7 +151,7 @@
             <div class="flex flex-wrap gap-4">
               <div class="daily-card">
                 <div>Tue</div>
-                <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
+                <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
                   <div>68°</div>
                   <div>57°</div>
@@ -136,7 +159,7 @@
               </div>
               <div class="daily-card">
                 <div>Tue</div>
-                <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
+                <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
                   <div>68°</div>
                   <div>57°</div>
@@ -144,7 +167,7 @@
               </div>
               <div class="daily-card">
                 <div>Tue</div>
-                <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
+                <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
                   <div>68°</div>
                   <div>57°</div>
@@ -152,7 +175,7 @@
               </div>
               <div class="daily-card">
                 <div>Tue</div>
-                <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
+                <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
                   <div>68°</div>
                   <div>57°</div>
@@ -160,7 +183,7 @@
               </div>
               <div class="daily-card">
                 <div>Tue</div>
-                <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
+                <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
                   <div>68°</div>
                   <div>57°</div>
@@ -168,7 +191,7 @@
               </div>
               <div class="daily-card">
                 <div>Tue</div>
-                <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
+                <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
                   <div>68°</div>
                   <div>57°</div>
@@ -176,7 +199,7 @@
               </div>
               <div class="daily-card">
                 <div>Tue</div>
-                <img src="images/icon-drizzle.webp" alt="" class="w-fit" />
+                <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
                   <div>68°</div>
                   <div>57°</div>
@@ -188,79 +211,93 @@
         <a href="#hourlyWeather" class="absolute -left-100000"
           >Skip to Hourly Forecast</a
         >
-
+        <!--TODO remember to put alt text and tittles for images when you run javascript-->
         <section
           class="bg-neutral-800 p-5 rounded-lg w-[min(100%,400px)] 1290:w-[min(100%,800px)]"
           aria-labelledby="hourlyHeader"
         >
-          <div class="flex w-full justify-between items-center">
+          <div class="flex w-full justify-between items-start">
             <h2 id="hourlyHeader">Hourly Forecast</h2>
-            <button
-              tabindex="1"
-              class="flex bg-neutral-600 p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
-            >
-              <span>Tuesday</span
-              ><img
-                src="images/icon-dropdown.svg"
-                width="13"
-                height="8"
-                alt=""
-              />
-            </button>
+            <div class="flex flex-col items-end relative">
+              <button
+                tabindex="1"
+                class="flex bg-neutral-600 p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
+                title="Days Drop Down"
+                aria-label="Select a day from monday to sunday to view the hourly forecast for that day"
+              >
+                <span>Tuesday</span
+                ><img
+                  src="images/icon-dropdown.svg"
+                  width="13"
+                  height="8"
+                  alt=""
+                />
+              </button>
+
+              <div class="days-drop-down" aria-expanded="false">
+                <button class="day">Monday</button>
+                <button class="day">Tuesday</button>
+                <button class="day">Wednesday</button>
+                <button class="day">Thursday</button>
+                <button class="day">Friday</button>
+                <button class="day">Saturday</button>
+                <button class="day">Sunday</button>
+              </div>
+            </div>
           </div>
 
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>
           </div>
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>
           </div>
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>
           </div>
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>
           </div>
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>
           </div>
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>
           </div>
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>
           </div>
           <div class="hourly-card">
             <div class="icon-time">
-              <img src="images/icon-fog.webp" class="w-10" alt="" />
+              <img src="images/icon-fog.webp" alt="" />
               <div>3 PM</div>
             </div>
             <div>68°</div>

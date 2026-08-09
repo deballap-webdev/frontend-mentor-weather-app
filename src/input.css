@@ -9,12 +9,18 @@
   & > .temp {
     @apply flex justify-between w-full;
   }
+  img {
+    @apply w-fit;
+  }
 }
 
 .hourly-card {
   @apply flex items-center justify-between my-4 p-2 bg-neutral-700 rounded-lg border border-solid border-neutral-600;
   & > .icon-time {
     @apply w-25 flex items-center;
+    img {
+      @apply w-10;
+    }
   }
 }
 
@@ -28,4 +34,27 @@
   @media screen and (width < 1290px) {
     @slot;
   }
+}
+
+.units-drop-down {
+  @apply flex flex-col bg-neutral-800 border-neutral-600 border border-solid w-60 rounded-lg p-2 top-15 shadow-2xl/70 absolute z-10 hidden;
+  .unit {
+    @apply text-left flex justify-between min-w-12 min-h-12 hover:bg-neutral-700 p-2 rounded-lg;
+  }
+  .header {
+    @apply p-2 border-t-neutral-700 border-t text-[rgba(255,255,255,0.6)];
+  }
+}
+
+.days-drop-down {
+  @apply flex flex-col bg-neutral-800 border-neutral-600 border border-solid w-60 rounded-lg p-2 top-13 shadow-2xl/70 absolute z-10 hidden;
+  & > .day {
+    @apply hover:cursor-pointer min-w-12 min-h-12 text-left hover:bg-neutral-700 p-2 rounded-lg;
+  }
+}
+
+@theme {
+  /*|| COLORS */
+
+  /*|| FONT */
 }
