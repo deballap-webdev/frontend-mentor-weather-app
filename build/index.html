@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/favicon-32x32.png" />
     <title>front-end mentor's weather app challenge</title>
   </head>
   <body
-    class="bg-neutral-900 text-white p-4 w-full min-h-screen h-fit text-[1.125rem] md:p-8"
+    class="bg-BGCOLOR text-white p-4 w-full min-h-screen h-fit text-FS font-FONT-FAM md:p-8"
   >
     <header class="flex justify-between items-start max-w-322 mx-auto">
       <img
@@ -18,8 +25,7 @@
       />
       <div class="flex items-end flex-col relative">
         <button
-          tabindex="1"
-          class="flex bg-neutral-800 w-30 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white min-w-12 min-h-12"
+          class="flex bg-CONTAINER-BGCOLOR border border-BORDER-COLOR w-30 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white min-w-12 min-h-12"
           id="toggleUnit"
           aria-label="toogle between imperial and metric units"
           title="Units Toogle"
@@ -34,31 +40,33 @@
         </button>
 
         <div class="units-drop-down" aria-expanded="false">
-          <button tabindex="1" class="unit">Switch to imperial</button>
+          <button class="unit">Switch to imperial</button>
           <div class="header">Temperature</div>
-          <button tabindex="1" class="unit">Celsuis (C)</button>
-          <button tabindex="1" class="unit">
+          <button class="unit">Celsuis (C)</button>
+          <button class="unit">
             Fahrenheit (F)
             <img src="images/icon-checkmark.svg" alt="" />
           </button>
           <div class="header">Wind Speed</div>
-          <button tabindex="1" class="unit">km/h</button>
-          <button tabindex="1" class="unit">mp/h</button>
+          <button class="unit">km/h</button>
+          <button class="unit">mp/h</button>
           <div class="header">Percipitation</div>
-          <button tabindex="1" class="unit">Millimeters (mm)</button>
-          <button tabindex="1" class="unit">Inches (in)</button>
+          <button class="unit">Millimeters (mm)</button>
+          <button class="unit">Inches (in)</button>
         </div>
       </div>
     </header>
     <main class="flex justify-center items-center flex-col">
-      <h1 class="text-4xl my-12 text-center">How's the Sky Looking today?</h1>
+      <h1 class="text-6xl my-12 text-center font-HEADER-FONT">
+        How's the Sky Looking today?
+      </h1>
       <section class="w-full">
         <form
           class="flex flex-wrap flex-row mx-auto gap-4 w-[min(100%,600px)] lg:w-175"
           id="searchForm"
         >
           <div
-            class="bg-neutral-700 rounded-lg flex items-center 570:grow px-4 w-[min(100%,400px)] lg:w-135 min-h-48px focus-within:outline-white focus-within:outline-1"
+            class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR rounded-lg flex items-center 570:grow px-4 w-[min(100%,400px)] lg:w-135 min-h-48px focus-within:outline-white focus-within:outline-1"
             tabindex="1"
           >
             <img
@@ -79,18 +87,18 @@
           </div>
 
           <button
-            tabindex="1"
-            class="bg-blue-900 py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1"
+            class="bg-SEARCH-BTN-COLOR py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1"
             aria-label="submit location search"
             title="Search Button"
-            tabindex="1"
             type="submit"
           >
             Search
           </button>
         </form>
       </section>
-      <a href="#dailyHeader" class="absolute -left-100000"
+      <a
+        href="#dailyHeader"
+        class="absolute top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
         >Skip to Current Weather</a
       >
       <div
@@ -105,19 +113,21 @@
               class="bg-[url(../images/bg-today-small.svg)] p-4 h-71.5 mb-4 bg-center bg-cover bg-no-repeat flex flex-wrap justify-between items-center md:bg-[url(../images/bg-today-large.svg)] rounded-3xl md:max-w-200"
               id="currentWeather"
             >
-              <div>
+              <div class="text-center mx-auto md:text-left md:mx-0">
                 <div class="font-bold text-3xl mb-4">Berlin, Germany</div>
                 <div>Tuesday, Aug 5, 2025</div>
               </div>
 
-              <div class="flex items-center justify-between w-full md:w-55">
+              <div
+                class="flex items-center justify-between w-full md:w-55 mr-1"
+              >
                 <img
                   src="images/icon-sunny.webp"
                   width="100"
                   height="100"
                   alt="sunny icon"
                 />
-                <div class="text-7xl italic text-bold">20°</div>
+                <div class="text-7xl italic font-semibold">20°</div>
               </div>
             </section>
 
@@ -143,7 +153,9 @@
               </div>
             </section>
           </section>
-          <a href="#dailyHeader" class="absolute -left-100000"
+          <a
+            href="#dailyHeader"
+            class="absolute top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
             >Skip to Daily Forecast</a
           >
           <section aria-labelledby="dailyHeader" class="max-w-200">
@@ -208,20 +220,21 @@
             </div>
           </section>
         </div>
-        <a href="#hourlyWeather" class="absolute -left-100000"
+        <a
+          href="#hourlyWeather"
+          class="absolute top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
           >Skip to Hourly Forecast</a
         >
         <!--TODO remember to put alt text and tittles for images when you run javascript-->
         <section
-          class="bg-neutral-800 p-5 rounded-lg w-[min(100%,400px)] 1290:w-[min(100%,800px)]"
+          class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR p-5 rounded-lg w-[min(100%,400px)] 1290:w-[min(100%,800px)]"
           aria-labelledby="hourlyHeader"
         >
           <div class="flex w-full justify-between items-start">
             <h2 id="hourlyHeader">Hourly Forecast</h2>
             <div class="flex flex-col items-end relative">
               <button
-                tabindex="1"
-                class="flex bg-neutral-600 p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
+                class="flex bg-LIGHT-BORDER-COLOR p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
                 title="Days Drop Down"
                 aria-label="Select a day from monday to sunday to view the hourly forecast for that day"
               >
@@ -304,6 +317,7 @@
           </div>
         </section>
       </div>
+      <p id="confirmation" class="-left-10000" aria-live="assertive"></p>
     </main>
   </body>
 </html>

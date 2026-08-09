@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 .current-card {
-  @apply bg-neutral-700 border flex flex-col justify-between border-solid border-slate-400 rounded-lg p-6 h-30 w-40 md:w-47 mt-2;
+  @apply bg-CONTAINER-BGCOLOR border flex flex-col justify-between border-solid border-LIGHT-BORDER-COLOR rounded-lg p-6 h-30 w-40 md:w-47 mt-2;
 }
 
 .daily-card {
-  @apply w-25 bg-neutral-800 p-2 flex flex-col rounded-lg border border-slate-400 items-center;
+  @apply w-25 bg-CONTAINER-BGCOLOR p-2 flex flex-col rounded-lg border border-LIGHT-BORDER-COLOR items-center;
   & > .temp {
     @apply flex justify-between w-full;
   }
@@ -15,7 +15,7 @@
 }
 
 .hourly-card {
-  @apply flex items-center justify-between my-4 p-2 bg-neutral-700 rounded-lg border border-solid border-neutral-600;
+  @apply flex items-center justify-between my-4 p-2 bg-LIGHT-BGCOLOR rounded-lg border border-solid border-LIGHT-BORDER-COLOR;
   & > .icon-time {
     @apply w-25 flex items-center;
     img {
@@ -37,24 +37,33 @@
 }
 
 .units-drop-down {
-  @apply flex flex-col bg-neutral-800 border-neutral-600 border border-solid w-60 rounded-lg p-2 top-15 shadow-2xl/70 absolute z-10 hidden;
+  @apply hidden flex-col bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR border border-solid w-60 rounded-lg p-2 top-15 shadow-2xl/70 absolute z-10;
   .unit {
-    @apply text-left flex justify-between min-w-12 min-h-12 hover:bg-neutral-700 p-2 rounded-lg;
+    @apply flex text-left justify-between min-w-12 min-h-12 hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
   }
   .header {
-    @apply p-2 border-t-neutral-700 border-t text-[rgba(255,255,255,0.6)];
+    @apply p-2 border-t-LIGHT-BORDER-COLOR border-t text-FADED-COLOR;
   }
 }
 
 .days-drop-down {
-  @apply flex flex-col bg-neutral-800 border-neutral-600 border border-solid w-60 rounded-lg p-2 top-13 shadow-2xl/70 absolute z-10 hidden;
+  @apply hidden flex-col bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR border border-solid w-60 rounded-lg p-2 top-13 shadow-2xl/70 absolute z-10;
   & > .day {
-    @apply hover:cursor-pointer min-w-12 min-h-12 text-left hover:bg-neutral-700 p-2 rounded-lg;
+    @apply hover:cursor-pointer min-w-12 min-h-12 text-left hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
   }
 }
 
 @theme {
   /*|| COLORS */
-
+  --color-BGCOLOR: rgb(2, 1, 43);
+  --color-CONTAINER-BGCOLOR: rgb(37, 37, 63);
+  --color-SEARCH-BTN-COLOR: rgb(70, 87, 217);
+  --color-LIGHT-BGCOLOR: rgb(47, 47, 73);
+  --color-BORDER-COLOR: rgb(36, 35, 67);
+  --color-LIGHT-BORDER-COLOR: rgb(60, 60, 90);
+  --color-FADED-COLOR: rgb(132, 134, 154);
   /*|| FONT */
+  --text-FS: 18px;
+  --font-HEADER-FONT: "Bricolage Grotesque", sans-serif;
+  --font-FONT-FAM: "DM Sans", sans-serif;
 }
