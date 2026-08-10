@@ -41,29 +41,38 @@
           />
         </button>
 
-        <div class="units-drop-down hidden" aria-expanded="false">
-          <button class="unit">Switch to imperial</button>
+        <div
+          class="units-drop-down hidden"
+          id="unitsDropDown"
+          aria-expanded="false"
+        >
+          <button class="switchBtn" id="imperialBtn">Switch to imperial</button>
+          <button class="switchBtn" id="metricBtn">Switch to metric</button>
           <div class="header">Temperature</div>
-          <button class="unit">Celsuis (C)</button>
-          <button class="unit">
+          <button class="unit" id="°CBtn">Celsuis (°C)</button>
+          <button class="unit" id="°FBtn">
             Fahrenheit (F)
             <img src="images/icon-checkmark.svg" alt="" />
           </button>
           <div class="header">Wind Speed</div>
-          <button class="unit">km/h</button>
-          <button class="unit">mp/h</button>
+          <button class="unit" id="km/hBtn">km/h</button>
+          <button class="unit" id="mphBtn">mph</button>
           <div class="header">Percipitation</div>
-          <button class="unit">Millimeters (mm)</button>
-          <button class="unit">Inches (in)</button>
+          <button class="unit" id="mmBtn">Millimeters (mm)</button>
+          <button class="unit" id="inchBtn">Inches (in)</button>
         </div>
       </div>
     </header>
     <main class="flex justify-center items-center flex-col">
-      <h1 class="text-6xl my-12 text-center font-HEADER-FONT">
-        How's the Sky Looking today?
+      <h1 class="absolute -left-10000">
+        Front End Mentor's Intermediate Weather App Challenge
       </h1>
+      <p class="text-6xl my-12 text-center font-HEADER-FONT">
+        How's the Sky Looking today?
+      </p>
       <section class="w-full">
         <form
+          role="search"
           class="flex flex-wrap flex-row mx-auto gap-4 w-[min(100%,600px)] lg:w-175"
           id="searchForm"
         >
@@ -80,7 +89,7 @@
               >Search Weather Conditions For Any Location</label
             >
             <input
-              type="text"
+              type="search"
               placeholder="Search for a place..."
               class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
               id="searchInput"

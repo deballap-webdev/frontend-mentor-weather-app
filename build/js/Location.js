@@ -4,14 +4,14 @@ export default class Location {
   #name;
   #wind;
   #temp;
-  #percipt;
+  #precipt;
   constructor() {
     this.#lat = null;
     this.#lon = null;
     this.#name = null;
     this.#wind = "mph";
     this.#temp = "fahrenheit";
-    this.#percipt = "inches";
+    this.#precipt = "inch";
   }
 
   getLat() {
@@ -34,23 +34,29 @@ export default class Location {
     return this.#temp;
   }
 
-  getPercipt() {
-    return this.#percipt;
+  getPrecipt() {
+    return this.#precipt;
   }
 
   setLocation(locationObj) {
-    const { lat, lon, name, wind, temp, percipt } = locationObj;
-    this.#lat = lat;
-    this.#lon = lon;
-    this.#name = name;
+    const { lat, lon, name, wind, temp, precipt } = locationObj;
+    if (lat) {
+      this.#lat = lat;
+    }
+    if (lon) {
+      this.#lon = lon;
+    }
+    if (name) {
+      this.#name = name;
+    }
     if (wind) {
       this.#wind = wind;
     }
     if (temp) {
       this.#temp = temp;
     }
-    if (percipt) {
-      this.#percipt = percipt;
+    if (precipt) {
+      this.#precipt = precipt;
     }
   }
 }

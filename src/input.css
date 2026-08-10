@@ -44,6 +44,9 @@
   .header {
     @apply p-2 border-t-LIGHT-BORDER-COLOR border-t text-FADED-COLOR;
   }
+  .switchBtn {
+    @apply text-left min-w-12 min-h-12 hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
+  }
 }
 
 .days-drop-down {

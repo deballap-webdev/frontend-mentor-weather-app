@@ -2,8 +2,14 @@ import {
   getCoordsFromApi,
   getNameFromApi,
   generateName,
+  getWeatherFromApi,
+  setUnit,
 } from "./dataFunctions.js";
-import { dropDownDisplay } from "./domFunctions.js";
+import {
+  dropDownDisplay,
+  updateDisplay,
+  switchUnitBtnDisplay,
+} from "./domFunctions.js";
 import Location from "./Location.js";
 
 const currentLocation = new Location();
@@ -17,7 +23,8 @@ const initApp = () => {
   dayButton.addEventListener("focusout", dropDownDisplay);
   const searchForm = document.getElementById("searchForm");
   searchForm.addEventListener("submit", submitLocation);
-  getGeolocation();
+  const unitsDropDown = document.getElementById("unitsDropDown");
+  unitsDropDown.addEventListener("click", updateUnitAndDisplay);
 };
 
 const getGeolocation = () => {
@@ -29,7 +36,7 @@ const getGeolocation = () => {
 };
 
 const geoSuccess = async (positionObj) => {
-  const CoordsObj = {
+  const coordsObj = {
     lat: positionObj.coords.latitude,
     lon: positionObj.coords.longitude,
     name: await getNameFromApi(
@@ -37,7 +44,7 @@ const geoSuccess = async (positionObj) => {
       positionObj.coords.longitude,
     ),
   };
-  currentLocation.setLocation(CoordsObj);
+  currentLocation.setLocation(coordsObj);
 };
 
 const geoError = (errMsg) => {};
@@ -51,7 +58,7 @@ const submitLocation = async (event) => {
   const coordsJson = await getCoordsFromApi(searchText);
   if (coordsJson) {
     if (coordsJson.error) {
-      updateDisplay(coordsJson.error);
+      updateDisplay(coordsJson.reason);
       return;
     }
     if (!coordsJson.results) {
@@ -63,13 +70,29 @@ const submitLocation = async (event) => {
       lon: coordsJson.results[0].longitude,
       name: generateName(coordsJson.results[0]),
     };
-    updateDataAndDisplay(coordsObj);
     currentLocation.setLocation(coordsObj);
+
+    updateDataAndDisplay();
   }
 };
 
-const updateDataAndDisplay = (coordsObj) => {
-  updateDisplay(coordsObj);
+const updateUnitAndDisplay = (event) => {
+  console.log("omor");
+  currentLocation.setLocation(setUnit(event));
+  switchUnitBtnDisplay(currentLocation);
+  console.log(setUnit(event));
+};
+
+const updateDataAndDisplay = async () => {
+  const coordsObj = {
+    lat: currentLocation.getLat(),
+    lon: currentLocation.getLon(),
+    wind: currentLocation.getWind(),
+    precipt: currentLocation.getPrecipt(),
+    temp: currentLocation.getTemp(),
+  };
+  const weatherJson = await getWeatherFromApi(coordsObj);
+  updateDisplay(weatherJson);
 };
 
 document.addEventListener("DOMContentLoaded", initApp);
