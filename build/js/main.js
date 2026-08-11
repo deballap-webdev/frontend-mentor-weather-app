@@ -121,6 +121,6 @@ const handleHourlyData = async (event) => {
     hourlyJson,
   );
 
-  updateDisplay(weatherJson, locationObj, hourlyData);
+  updateDisplay(weatherJson, currentLocation, hourlyData);
 };
 document.addEventListener("DOMContentLoaded", initApp);

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .current-card {
-  @apply bg-CONTAINER-BGCOLOR border flex flex-col justify-between border-solid border-LIGHT-BORDER-COLOR rounded-lg p-6 h-30 w-40 md:w-47 mt-2;
+  @apply bg-CONTAINER-BGCOLOR border flex flex-col justify-between border-solid border-LIGHT-BORDER-COLOR rounded-lg p-6 h-30 w-40 md:w-47 mt-2 grow;
 }
 
 .daily-card {

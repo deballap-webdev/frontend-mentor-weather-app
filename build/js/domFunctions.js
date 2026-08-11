@@ -57,6 +57,11 @@ export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
     locationObj,
     weatherJson,
   );
+
+  const currentDetailsArray = createCurrentDetailsDivs(
+    locationObj,
+    weatherJson.current,
+  );
 };
 
 const createCurrentWeatherDivs = (locationObj, weatherJson) => {
@@ -74,9 +79,7 @@ const createCurrentWeatherDivs = (locationObj, weatherJson) => {
     [],
     `${new Date(weatherJson.daily.time[0]).toDateString()}`,
   );
-
   nameDateContainer.append(name, date);
-
   const iconTempContainer = createElem([
     "flex",
     "items-center",
@@ -92,8 +95,47 @@ const createCurrentWeatherDivs = (locationObj, weatherJson) => {
     `${Math.round(weatherJson.current.temperature_2m)}°`,
   );
   iconTempContainer.append(icon, temp);
-
   return [nameDateContainer, iconTempContainer];
+};
+
+const createCurrentDetailsDivs = (locationObj, currentWeather) => {
+  const windUnit = locationObj.getWind() === "mph" ? "mph" : "km/h";
+  const precipitUnit = locationObj.getPrecipt() === "inch" ? "in" : "mm";
+  const feels = createCurrentCard(
+    createElem([], "Feels Like"),
+    createElem(
+      ["text-2xl"],
+      `${Math.round(currentWeather.apparent_temperature)}°`,
+    ),
+  );
+  const humidity = createCurrentCard(
+    createElem([], "Humidity"),
+    createElem(
+      ["text-2xl"],
+      `${Math.round(currentWeather.relative_humidity_2m)}%`,
+    ),
+  );
+  const precipit = createCurrentCard(
+    createElem([], "precipitation"),
+    createElem(
+      ["text-2xl"],
+      `${Math.round(currentWeather.percipitation)} ${precipitUnit}`,
+    ),
+  );
+  const wind = createCurrentCard(
+    createElem([], "Wind"),
+    createElem(
+      ["text-2xl"],
+      `${Math.round(currentWeather.wind_speed_10m)} ${windUnit}`,
+    ),
+  );
+
+  return [feels, humidity, wind, precipit];
+};
+
+const createCurrentCard = (criteria, value) => {
+  const currentDiv = createElem(["current-card"]);
+  currentDiv.append(criteria, value);
 };
 
 const buildIcon = (weatherCode, width, height) => {
@@ -108,9 +150,11 @@ const buildIcon = (weatherCode, width, height) => {
 
 const createElem = (classListArray, textContent) => {
   const div = document.createElement("div");
-  classListArray.forEach((className) => {
-    div.classList.add(className);
-  });
+  if (classListArray.length) {
+    classListArray.forEach((className) => {
+      div.classList.add(className);
+    });
+  }
   if (textContent) {
     div.textContent = textContent;
   }

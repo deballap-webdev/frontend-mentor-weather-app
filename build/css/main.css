@@ -285,9 +285,6 @@
   .shrink {
     flex-shrink: 1;
   }
-  .grow {
-    flex-grow: 1;
-  }
   .rotate-180 {
     rotate: 180deg;
   }
@@ -503,6 +500,7 @@
   display: flex;
   height: calc(var(--spacing) * 30);
   width: calc(var(--spacing) * 40);
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
   border-radius: var(--radius-lg);
