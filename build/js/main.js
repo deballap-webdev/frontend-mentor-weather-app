@@ -3,7 +3,8 @@ import {
   getNameFromApi,
   generateName,
   getWeatherFromApi,
-  setUnit,
+  getUnits,
+  getHourlyData,
 } from "./dataFunctions.js";
 import {
   dropDownDisplay,
@@ -25,6 +26,8 @@ const initApp = () => {
   searchForm.addEventListener("submit", submitLocation);
   const unitsDropDown = document.getElementById("unitsDropDown");
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
+  const daysDropDown = document.getElementById("daysDropDown");
+  daysDropDown.addEventListener("click", handleHourlyData);
 };
 
 const getGeolocation = () => {
@@ -71,16 +74,16 @@ const submitLocation = async (event) => {
       name: generateName(coordsJson.results[0]),
     };
     currentLocation.setLocation(coordsObj);
-
     updateDataAndDisplay();
   }
 };
 
 const updateUnitAndDisplay = (event) => {
-  console.log("omor");
-  currentLocation.setLocation(setUnit(event));
+  const unitObj = getUnits(event);
+  if (!unitObj) return;
+  currentLocation.setLocation(getUnits(event));
   switchUnitBtnDisplay(currentLocation);
-  console.log(setUnit(event));
+  console.log(currentLocation);
 };
 
 const updateDataAndDisplay = async () => {
@@ -95,4 +98,21 @@ const updateDataAndDisplay = async () => {
   updateDisplay(weatherJson);
 };
 
+const handleHourlyData = async (event) => {
+  const locationObj = {
+    lat: currentLocation.getLat(),
+    lon: currentLocation.getLon(),
+    name: currentLocation.getName(),
+    wind: currentLocation.getWind(),
+    temp: currentLocation.getTemp(),
+    precipt: currentLocation.getPrecipt(),
+  };
+  const weatherJson = await getWeatherFromApi(locationObj);
+  const hourlyJson = weatherJson.hourly;
+  const hourlyData = getHourlyData(
+    event.target.closest("button").dataset.day,
+    hourlyJson,
+  );
+  updateDisplay(event.target.closest("button"), hourlyData);
+};
 document.addEventListener("DOMContentLoaded", initApp);

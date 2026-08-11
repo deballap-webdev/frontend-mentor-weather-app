@@ -5,17 +5,23 @@ export const dropDownDisplay = (event) => {
       .classList.toggle("rotate-180");
     event.currentTarget.nextElementSibling.classList.toggle("hidden");
     event.currentTarget.nextElementSibling.classList.toggle("flex");
+    event.target.ariaExpanded === "true" ? "false" : "true";
   } else {
-    event.currentTarget
-      .querySelector('img[data-dropDown="true"]')
-      .classList.remove("rotate-180");
-    hide(event.currentTarget.nextElementSibling);
+    setTimeout(hideDropDown, 300, event);
   }
 };
 
+const hideDropDown = (event) => {
+  event.target
+    .querySelector('img[data-dropDown="true"]')
+    .classList.remove("rotate-180");
+  hide(event.target.nextElementSibling);
+  event.target.ariaExpanded = "false";
+};
+
 export const switchUnitBtnDisplay = (locationObj) => {
-  const imperialBtn = document.getElementById("imperialBtn");
-  const metricBtn = document.getElementById("metricBtn");
+  const imperialBtn = document.querySelector("[data-name='imperialBtn']");
+  const metricBtn = document.querySelector("[data-name='metricBtn']");
   if (
     locationObj.getWind() === "mph" &&
     locationObj.getTemp() === "fahrenheit" &&
@@ -24,9 +30,9 @@ export const switchUnitBtnDisplay = (locationObj) => {
     hide(imperialBtn);
     show(metricBtn);
   } else if (
-    locationObj.getWind() === "mph" &&
-    locationObj.getTemp() === "fahrenheit" &&
-    locationObj.getPrecipt() === "inch"
+    locationObj.getWind() === "kmh" &&
+    locationObj.getTemp() === "celsius" &&
+    locationObj.getPrecipt() === "mm"
   ) {
     hide(metricBtn);
     show(imperialBtn);
@@ -81,7 +87,7 @@ const getWeatherDetails = (weatherCode) => {
   };
 
   return {
-    desc: weatherCodeLookup.weatherCode.desc,
-    iconName: weatherCodeLookup.weatherCode.iconName,
+    desc: weatherCodeLookup[weatherCode].desc,
+    iconName: weatherCodeLookup[weatherCode].iconName,
   };
 };

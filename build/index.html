@@ -46,20 +46,24 @@
           id="unitsDropDown"
           aria-expanded="false"
         >
-          <button class="switchBtn" id="imperialBtn">Switch to imperial</button>
-          <button class="switchBtn" id="metricBtn">Switch to metric</button>
+          <button class="switchBtn" data-name="imperialBtn">
+            Switch to imperial
+          </button>
+          <button class="switchBtn" data-name="metricBtn">
+            Switch to metric
+          </button>
           <div class="header">Temperature</div>
-          <button class="unit" id="°CBtn">Celsuis (°C)</button>
-          <button class="unit" id="°FBtn">
+          <button class="unit" data-name="°CBtn">Celsuis (°C)</button>
+          <button class="unit" data-name="°FBtn">
             Fahrenheit (F)
             <img src="images/icon-checkmark.svg" alt="" />
           </button>
           <div class="header">Wind Speed</div>
-          <button class="unit" id="km/hBtn">km/h</button>
-          <button class="unit" id="mphBtn">mph</button>
+          <button class="unit" data-name="km/hBtn">km/h</button>
+          <button class="unit" data-name="mphBtn">mph</button>
           <div class="header">Percipitation</div>
-          <button class="unit" id="mmBtn">Millimeters (mm)</button>
-          <button class="unit" id="inchBtn">Inches (in)</button>
+          <button class="unit" data-name="mmBtn">Millimeters (mm)</button>
+          <button class="unit" data-name="inchBtn">Inches (in)</button>
         </div>
       </div>
     </header>
@@ -260,14 +264,18 @@
                 />
               </button>
 
-              <div class="days-drop-down hidden" aria-expanded="false">
-                <button class="day">Monday</button>
-                <button class="day">Tuesday</button>
-                <button class="day">Wednesday</button>
-                <button class="day">Thursday</button>
-                <button class="day">Friday</button>
-                <button class="day">Saturday</button>
-                <button class="day">Sunday</button>
+              <div
+                class="days-drop-down hidden"
+                id="daysDropDown"
+                aria-expanded="false"
+              >
+                <button class="day" data-day="monday">Monday</button>
+                <button class="day" data-day="tuesday">Tuesday</button>
+                <button class="day" data-day="wednesday">Wednesday</button>
+                <button class="day" data-day="thursday">Thursday</button>
+                <button class="day" data-day="friday">Friday</button>
+                <button class="day" data-day="saturday">Saturday</button>
+                <button class="day" data-day="sunday">Sunday</button>
               </div>
             </div>
           </div>
