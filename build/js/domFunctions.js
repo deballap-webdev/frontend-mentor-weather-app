@@ -62,6 +62,8 @@ export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
     locationObj,
     weatherJson.current,
   );
+
+  const dailyWeatherArray = createDailyDivs(weatherJson.daily);
 };
 
 const createCurrentWeatherDivs = (locationObj, weatherJson) => {
@@ -88,7 +90,6 @@ const createCurrentWeatherDivs = (locationObj, weatherJson) => {
     "md:w-55",
     "mr-1",
   ]);
-  console.log(name);
   const icon = buildIcon(weatherJson.current.weather_code, "100", "100");
   const temp = createElem(
     ["text-7xl", "italic", "font-semibold"],
@@ -101,41 +102,64 @@ const createCurrentWeatherDivs = (locationObj, weatherJson) => {
 const createCurrentDetailsDivs = (locationObj, currentWeather) => {
   const windUnit = locationObj.getWind() === "mph" ? "mph" : "km/h";
   const precipitUnit = locationObj.getPrecipt() === "inch" ? "in" : "mm";
-  const feels = createCurrentCard(
+  const feels = createCard("current-card", [
     createElem([], "Feels Like"),
     createElem(
       ["text-2xl"],
       `${Math.round(currentWeather.apparent_temperature)}°`,
     ),
-  );
-  const humidity = createCurrentCard(
+  ]);
+  const humidity = createCard("current-card", [
     createElem([], "Humidity"),
     createElem(
       ["text-2xl"],
       `${Math.round(currentWeather.relative_humidity_2m)}%`,
     ),
-  );
-  const precipit = createCurrentCard(
+  ]);
+  const precipit = createCard("current-card", [
     createElem([], "precipitation"),
     createElem(
       ["text-2xl"],
-      `${Math.round(currentWeather.percipitation)} ${precipitUnit}`,
+      `${Math.round(currentWeather.precipitation)} ${precipitUnit}`,
     ),
-  );
-  const wind = createCurrentCard(
+  ]);
+  const wind = createCard("current-card", [
     createElem([], "Wind"),
     createElem(
       ["text-2xl"],
       `${Math.round(currentWeather.wind_speed_10m)} ${windUnit}`,
     ),
-  );
+  ]);
 
   return [feels, humidity, wind, precipit];
 };
 
-const createCurrentCard = (criteria, value) => {
-  const currentDiv = createElem(["current-card"]);
-  currentDiv.append(criteria, value);
+const createDailyDivs = (dailyJson) => {
+  const dailyDivArray = [];
+  for (let i = 0; i <= 7; i++) {
+    const day = createElem(
+      [],
+      `${new Date(dailyJson.time[i]).toLocaleDateString("en-US", {
+        weekday: "short",
+      })}`,
+    );
+    const img = buildIcon(dailyJson.weather_code[i]);
+    const tempCard = createCard("temp", [
+      createElem([], `${Math.round(dailyJson.temperature_2m_max)}°`),
+      createElem([], `${Math.round(dailyJson.temperature_2m_min)}°`),
+    ]);
+    const dailyCard = createCard("daily-card", [day, img, tempCard]);
+    dailyDivArray.push(dailyCard);
+  }
+  return dailyDivArray;
+};
+
+const createCard = (cardClass, childrenArray) => {
+  const cardContainer = createElem([cardClass]);
+  childrenArray.forEach((child) => {
+    cardContainer.append(child);
+  });
+  return cardContainer;
 };
 
 const buildIcon = (weatherCode, width, height) => {
@@ -145,6 +169,7 @@ const buildIcon = (weatherCode, width, height) => {
   img.title = weatherDetails.iconName + "icon";
   img.width = width;
   img.height = height;
+  img.src = `images/icon-${weatherDetails.iconName}.webp`;
   return img;
 };
 
