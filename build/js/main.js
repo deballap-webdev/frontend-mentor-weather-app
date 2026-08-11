@@ -28,11 +28,18 @@ const initApp = () => {
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
   const daysDropDown = document.getElementById("daysDropDown");
   daysDropDown.addEventListener("click", handleHourlyData);
+
+  loadThePage();
 };
 
-const getGeolocation = () => {
+const loadThePage = async () => {
+  await getGeolocation();
+  console.log(currentLocation);
+};
+
+const getGeolocation = async () => {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+    await navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
   } else {
     return geoError();
   }
@@ -113,6 +120,7 @@ const handleHourlyData = async (event) => {
     event.target.closest("button").dataset.day,
     hourlyJson,
   );
-  updateDisplay(event.target.closest("button"), hourlyData);
+
+  updateDisplay(weatherJson, locationObj, hourlyData);
 };
 document.addEventListener("DOMContentLoaded", initApp);

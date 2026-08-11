@@ -5,7 +5,6 @@ export const getCoordsFromApi = async (entryText) => {
   try {
     const coordsStream = await fetch(encodedUrl);
     const coordsJson = await coordsStream.json();
-    console.log(coordsJson);
     return coordsJson;
   } catch (err) {
     console.err(err.stack);
@@ -41,53 +40,92 @@ export const generateName = (result) => {
 
 export const getWeatherFromApi = async (locationObj) => {
   const weatherStream = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${locationObj.lat}&longitude=${locationObj.lon}&wind_speed_unit=${locationObj.wind}&precipitation_unit=${locationObj.precipt}&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_min,temperature_2m_max&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,wind_speed_10m&timezone=auto`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${locationObj.lat}&longitude=${locationObj.lon}&wind_speed_unit=${locationObj.wind}&precipitation_unit=${locationObj.precipt}&temperature_unit=${locationObj.temp}&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_min,temperature_2m_max&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,wind_speed_10m,weather_code&timezone=auto`,
   );
   const weatherJson = await weatherStream.json();
   return weatherJson;
 };
 
-export const setUnit = (event) => {
-  console.log("hello");
-  if (event.target.id) {
-    let unitObj;
-    if (event.target.id === "imperialBtn") {
-      unitObj = {
-        wind: "km/h",
+export const getUnits = (event) => {
+  if (
+    event.target.closest("button") &&
+    event.target.closest("button").dataset.name
+  ) {
+    const unitLookUp = {
+      metricBtn: {
+        wind: "kmh",
         temp: "celsius",
         precipt: "mm",
-      };
-    } else if (event.target.id === "metricBtn") {
-      unitObj = {
+      },
+      imperialBtn: {
         wind: "mph",
         temp: "fahrenheit",
         precipt: "inch",
-      };
-    } else if (event.target.id === "km/hBtn") {
-      unitObj = {
-        wind: "km/h",
-      };
-    } else if (event.target.id === "mphBtn") {
-      unitObj = {
+      },
+      "km/hBtn": {
+        wind: "kmh",
+      },
+      mphBtn: {
         wind: "mph",
-      };
-    } else if (event.target.id === "inchBtn") {
-      unitObj = {
+      },
+      inchBtn: {
         precipt: "inch",
-      };
-    } else if (event.target.id === "mmBtn") {
-      unitObj = {
+      },
+      mmBtn: {
         precipt: "mm",
-      };
-    } else if (event.target.id === "°CBtn") {
-      unitObj = {
+      },
+      "°CBtn": {
+        temp: "celsius",
+      },
+      "°FBtn": {
         temp: "fahrenheit",
-      };
-    } else {
-      unitObj = {
-        temp: "celsuis",
-      };
-    }
-    return unitObj;
+      },
+    };
+    return unitLookUp[event.target.dataset.name];
   }
+};
+
+export const getHourlyData = (day, houlyJson) => {
+  console.log(houlyJson);
+  const timeArray = houlyJson.time;
+  const tempArray = houlyJson.temperature_2m;
+  const codeArray = houlyJson.weather_code;
+  const dayLookup = {
+    monday: {
+      time: timeArray.slice(0, 23),
+      temp: tempArray.slice(0, 23),
+      code: codeArray.slice(0, 23),
+    },
+    tuesday: {
+      time: timeArray.slice(24, 47),
+      temp: tempArray.slice(24, 47),
+      code: codeArray.slice(24, 47),
+    },
+    wednesday: {
+      time: timeArray.slice(48, 71),
+      temp: tempArray.slice(48, 71),
+      code: codeArray.slice(48, 71),
+    },
+    thursday: {
+      time: timeArray.slice(72, 95),
+      temp: tempArray.slice(72, 95),
+      code: codeArray.slice(72, 95),
+    },
+    friday: {
+      time: timeArray.slice(96, 119),
+      temp: tempArray.slice(96, 119),
+      code: codeArray.slice(96, 119),
+    },
+    saturday: {
+      time: timeArray.slice(120, 143),
+      temp: tempArray.slice(120, 143),
+      code: codeArray.slice(120, 143),
+    },
+    sunday: {
+      time: timeArray.slice(144, 167),
+      temp: tempArray.slice(144, 167),
+      code: codeArray.slice(144, 167),
+    },
+  };
+  return dayLookup[day];
 };

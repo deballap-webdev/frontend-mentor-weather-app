@@ -52,7 +52,70 @@ const show = (elem) => {
   elem.classList.remove("hidden");
 };
 
-export const updateDisplay = (displayData) => {};
+export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
+  const currentWeatherArray = createCurrentWeatherDivs(
+    locationObj,
+    weatherJson,
+  );
+};
+
+const createCurrentWeatherDivs = (locationObj, weatherJson) => {
+  const nameDateContainer = createElem([
+    "text-center",
+    "mx-auto",
+    "md:text-left",
+    "md:mx-0",
+  ]);
+  const name = createElem(
+    ["font-bold", "text-3xl", "mb-4"],
+    `${locationObj.name}`,
+  );
+  const date = createElem(
+    [],
+    `${new Date(weatherJson.daily.time[0]).toDateString()}`,
+  );
+
+  nameDateContainer.append(name, date);
+
+  const iconTempContainer = createElem([
+    "flex",
+    "items-center",
+    "justify-between",
+    "w-full",
+    "md:w-55",
+    "mr-1",
+  ]);
+  console.log(name);
+  const icon = buildIcon(weatherJson.current.weather_code, "100", "100");
+  const temp = createElem(
+    ["text-7xl", "italic", "font-semibold"],
+    `${Math.round(weatherJson.current.temperature_2m)}°`,
+  );
+  iconTempContainer.append(icon, temp);
+
+  return [nameDateContainer, iconTempContainer];
+};
+
+const buildIcon = (weatherCode, width, height) => {
+  const img = document.createElement("img");
+  const weatherDetails = getWeatherDetails(weatherCode);
+  img.alt = weatherDetails.iconName + "icon";
+  img.title = weatherDetails.iconName + "icon";
+  img.width = width;
+  img.height = height;
+  return img;
+};
+
+const createElem = (classListArray, textContent) => {
+  const div = document.createElement("div");
+  classListArray.forEach((className) => {
+    div.classList.add(className);
+  });
+  if (textContent) {
+    div.textContent = textContent;
+  }
+  return div;
+};
 
 const getWeatherDetails = (weatherCode) => {
   const weatherCodeLookup = {
