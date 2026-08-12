@@ -68,7 +68,7 @@
       <h1 class="absolute -left-10000">
         Front End Mentor's Intermediate Weather App Challenge
       </h1>
-      <p class="text-6xl my-12 text-center font-HEADER-FONT">
+      <p class="text-6xl my-12 text-center font-HEADER-FONT" id="headerDesc">
         How's the Sky Looking today?
       </p>
       <section class="w-full">
@@ -243,17 +243,17 @@
           aria-labelledby="hourlyHeader"
         >
           <div
-            class="flex w-full justify-between items-start sticky top-0 z-10 bg-CONTAINER-BGCOLOR p-4"
+            class="flex w-full justify-between items-center sticky top-0 z-10 bg-CONTAINER-BGCOLOR p-4"
           >
             <h2 id="hourlyHeader">Hourly Forecast</h2>
             <div class="flex flex-col items-end relative" id="daysContainer">
               <button
-                class="flex bg-LIGHT-BORDER-COLOR p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
+                class="flex bg-LIGHT-BORDER-COLOR p-2 rounded-lg justify-evenly w-37 hover:cursor-pointer focus:outline-1 focus:outline-white"
                 title="Days Drop Down"
                 aria-label="Select a day from monday to sunday to view the hourly forecast for that day"
                 id="chooseDay"
               >
-                <span>Tuesday</span
+                <span id="day">Wednesday</span
                 ><img
                   src="images/icon-dropdown.svg"
                   data-dropDown="true"

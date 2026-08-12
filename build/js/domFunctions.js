@@ -1,4 +1,4 @@
-export const dropDownDisplay = (event) => {
+export const dropDownDisplay = (event, elemToHide) => {
   if (event.type === "click") {
     event.currentTarget
       .querySelector('img[data-dropDown="true"]')
@@ -8,16 +8,19 @@ export const dropDownDisplay = (event) => {
     event.target.ariaExpanded =
       event.target.ariaExpanded === "true" ? "false" : "true";
   } else {
-    setTimeout(hideDropDown, 300, event);
+    if (event.currentTarget.contains(event.relatedTarget)) return;
+    setTimeout(hideDropDown, 300, elemToHide);
   }
 };
 
-const hideDropDown = (event) => {
-  event.target
+export const apiErrorDisplay = (text) => {};
+
+const hideDropDown = (elem) => {
+  elem
     .querySelector('img[data-dropDown="true"]')
     .classList.remove("rotate-180");
-  hide(event.target.nextElementSibling);
-  event.target.ariaExpanded = "false";
+  hide(elem.nextElementSibling);
+  elem.ariaExpanded = "false";
 };
 
 export const switchUnitBtnDisplay = (locationObj) => {
@@ -87,12 +90,13 @@ const show = (elem) => {
   elem.classList.remove("hidden");
 };
 
-export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
+export const updateDisplay = (weatherJson, locationObj, hourlyJson, date) => {
   const currentWeather = document.getElementById("currentWeather");
   const currentDetails = document.getElementById("currentWeather__details");
   const dailyWeather = document.getElementById("dailyWeather");
   const hourlyWeather = document.getElementById("hourlyWeather");
-
+  const headerDesc = document.getElementById("headerDesc");
+  const day = document.getElementById("day");
   clearElem([currentWeather, currentDetails, dailyWeather, hourlyWeather]);
   const currentWeatherArray = createCurrentWeatherDivs(
     locationObj,
@@ -120,6 +124,12 @@ export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
   hourlyWeatherArray.forEach((div) => {
     hourlyWeather.append(div);
   });
+
+  headerDesc.textContent = getWeatherDetails(
+    weatherJson.current.weather_code,
+  ).desc;
+
+  day.textContent = date;
   setFocusOnSearch();
 };
 

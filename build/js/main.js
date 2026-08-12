@@ -10,6 +10,7 @@ import {
   dropDownDisplay,
   updateDisplay,
   switchUnitBtnDisplay,
+  apiErrorDisplay,
 } from "./domFunctions.js";
 import Location from "./Location.js";
 
@@ -25,19 +26,22 @@ const initApp = () => {
   const daysDropDown = document.getElementById("daysDropDown");
 
   unitBtn.addEventListener("click", dropDownDisplay);
-  // unitBtn.addEventListener("focusout", dropDownDisplay);
+  unitContainer.addEventListener("focusout", (event) => {
+    dropDownDisplay(event, unitBtn);
+  });
   dayButton.addEventListener("click", dropDownDisplay);
-  //  dayButton.addEventListener("focusout", dropDownDisplay);
+  daysContainer.addEventListener("focusout", (event) => {
+    dropDownDisplay(event, dayButton);
+  });
   searchForm.addEventListener("submit", submitLocation);
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
-  daysDropDown.addEventListener("click", handleHourlyData);
+  daysDropDown.addEventListener("click", updateDataAndDisplay);
 
   loadThePage();
 };
 
-const loadThePage = async () => {
-  await getGeolocation();
-  console.log(currentLocation);
+const loadThePage = async (event) => {
+  getGeolocation();
 };
 
 const getGeolocation = async () => {
@@ -58,9 +62,12 @@ const geoSuccess = async (positionObj) => {
     ),
   };
   currentLocation.setLocation(coordsObj);
+  updateDataAndDisplay();
 };
 
-const geoError = (errMsg) => {};
+const geoError = (errMsg) => {
+  return "error";
+};
 
 const submitLocation = async (event) => {
   event.preventDefault();
@@ -69,23 +76,27 @@ const submitLocation = async (event) => {
     .value.trim();
   if (!searchText) return;
   const coordsJson = await getCoordsFromApi(searchText);
-  if (coordsJson) {
-    if (coordsJson.error) {
-      updateDisplay(coordsJson.reason);
-      return;
+  if (handleError(coordsJson)) return;
+
+  const coordsObj = {
+    lat: coordsJson.results[0].latitude,
+    lon: coordsJson.results[0].longitude,
+    name: generateName(coordsJson.results[0]),
+  };
+  currentLocation.setLocation(coordsObj);
+};
+
+const handleError = (apiData) => {
+  if (!apiData) {
+    apiErrorDisplay("Connection Error");
+    if (apiData.error) {
+      apiErrorDisplay(apiData.reason);
+    } else if (!apiData.results) {
+      apiErrorDisplay("No match found");
     }
-    if (!coordsJson.results) {
-      updateDisplay("No match found");
-      return;
-    }
-    const coordsObj = {
-      lat: coordsJson.results[0].latitude,
-      lon: coordsJson.results[0].longitude,
-      name: generateName(coordsJson.results[0]),
-    };
-    currentLocation.setLocation(coordsObj);
-    updateDataAndDisplay();
+    return true;
   }
+  return false;
 };
 
 const updateUnitAndDisplay = (event) => {
@@ -93,21 +104,20 @@ const updateUnitAndDisplay = (event) => {
   if (!unitObj) return;
   currentLocation.setLocation(getUnits(event));
   switchUnitBtnDisplay(currentLocation);
+  updateDataAndDisplay();
+};
+
+const updateDataAndDisplay = async (event) => {
   console.log(currentLocation);
-};
-
-const updateDataAndDisplay = async () => {
   const weatherJson = await getWeatherFromApi(currentLocation);
-  updateDisplay(weatherJson);
-};
-
-const handleHourlyData = async (event) => {
-  const weatherJson = await getWeatherFromApi(currentLocation);
-  const hourlyJson = weatherJson.hourly;
-  const hourlyData = getHourlyData(
-    event.target.closest("button").dataset.day,
-    hourlyJson,
-  );
-  updateDisplay(weatherJson, currentLocation, hourlyData);
+  const date = !event
+    ? `${new Date().toLocaleDateString("en-US", {
+        weekday: "long",
+      })}`
+    : event.taregt.closest("button").dataset.day;
+  console.log(weatherJson);
+  console.log(weatherJson.hourly);
+  const hourlyData = getHourlyData(date, weatherJson.hourly);
+  updateDisplay(weatherJson, currentLocation, hourlyData, date);
 };
 document.addEventListener("DOMContentLoaded", initApp);
