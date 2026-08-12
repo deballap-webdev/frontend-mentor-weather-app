@@ -21,9 +21,14 @@ const hideDropDown = (event) => {
 };
 
 export const switchUnitBtnDisplay = (locationObj) => {
+  const signature = `${locationObj.getWind()}-${locationObj.getTemp()}-${locationObj.getPrecipt()}`;
+  toggleBtnDisplay(signature);
+  checkActiveUnits(signature);
+};
+
+const toggleBtnDisplay = (signature) => {
   const imperialBtn = document.querySelector("[data-name='imperialBtn']");
   const metricBtn = document.querySelector("[data-name='metricBtn']");
-  const signature = `${locationObj.getWind()}-${locationObj.getTemp()}-${locationObj.getPrecipt()}`;
   const signatureLookUp = {
     "mph-fahrenheit-inch": () => {
       hide(imperialBtn);
@@ -42,6 +47,34 @@ export const switchUnitBtnDisplay = (locationObj) => {
     ? signatureLookUp[signature]
     : signatureLookUp["default"];
   action();
+};
+
+const checkActiveUnits = (signature) => {
+  const units = document.querySelectorAll(".unit");
+  const nameArray = signature.split("-").map((sign) => {
+    return sign + "Btn";
+  });
+  units.forEach((unit) => {
+    if (nameArray.includes(unit.dataset.name)) {
+      if (unit.querySelector(".checkMark")) return;
+      unit.append(buildCheckMark());
+      unit.classList.add("bg-LIGHT-BGCOLOR");
+    } else {
+      if (unit.querySelector(".checkMark"))
+        unit.querySelector(".checkMark").remove();
+      unit.classList.remove("bg-LIGHT-BGCOLOR");
+    }
+  });
+};
+
+const buildCheckMark = () => {
+  const checkMark = document.createElement("img");
+  checkMark.src = "images/icon-checkmark.svg";
+  checkMark.alt = "check mark";
+  checkMark.className = "checkMark";
+  checkMark.width = "14";
+  checkMark.height = "11";
+  return checkMark;
 };
 
 const hide = (elem) => {
@@ -87,7 +120,6 @@ export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
   hourlyWeatherArray.forEach((div) => {
     hourlyWeather.append(div);
   });
-
   setFocusOnSearch();
 };
 

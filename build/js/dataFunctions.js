@@ -62,7 +62,7 @@ export const getUnits = (event) => {
         temp: "fahrenheit",
         precipt: "inch",
       },
-      "km/hBtn": {
+      kmhBtn: {
         wind: "kmh",
       },
       mphBtn: {
@@ -74,10 +74,10 @@ export const getUnits = (event) => {
       mmBtn: {
         precipt: "mm",
       },
-      "°CBtn": {
+      celsiusBtn: {
         temp: "celsius",
       },
-      "°FBtn": {
+      fahrenheitBtn: {
         temp: "fahrenheit",
       },
     };

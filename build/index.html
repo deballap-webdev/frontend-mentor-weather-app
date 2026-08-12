@@ -24,7 +24,7 @@
         width="197"
         height="40"
       />
-      <div class="flex items-end flex-col relative">
+      <div class="flex items-end flex-col relative" id="unitContainer">
         <button
           class="flex bg-CONTAINER-BGCOLOR border border-BORDER-COLOR w-30 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white min-w-12 min-h-12"
           id="toggleUnit"
@@ -53,13 +53,10 @@
             Switch to metric
           </button>
           <div class="header">Temperature</div>
-          <button class="unit" data-name="°CBtn">Celsuis (°C)</button>
-          <button class="unit" data-name="°FBtn">
-            Fahrenheit (F)
-            <img src="images/icon-checkmark.svg" alt="" />
-          </button>
+          <button class="unit" data-name="celsiusBtn">Celsius (°C)</button>
+          <button class="unit" data-name="fahrenheitBtn">Fahrenheit (F)</button>
           <div class="header">Wind Speed</div>
-          <button class="unit" data-name="km/hBtn">km/h</button>
+          <button class="unit" data-name="kmhBtn">km/h</button>
           <button class="unit" data-name="mphBtn">mph</button>
           <div class="header">Percipitation</div>
           <button class="unit" data-name="mmBtn">Millimeters (mm)</button>
@@ -242,14 +239,14 @@
         >
 
         <section
-          class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR rounded-lg w-[min(100%,400px)] 1290:w-[min(100%,800px)] overflow-y-auto h-162.75"
+          class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR rounded-lg w-[min(100%,400px)] 1290:w-[min(100%,800px)] overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden h-162.75"
           aria-labelledby="hourlyHeader"
         >
           <div
             class="flex w-full justify-between items-start sticky top-0 z-10 bg-CONTAINER-BGCOLOR p-4"
           >
             <h2 id="hourlyHeader">Hourly Forecast</h2>
-            <div class="flex flex-col items-end relative">
+            <div class="flex flex-col items-end relative" id="daysContainer">
               <button
                 class="flex bg-LIGHT-BORDER-COLOR p-2 rounded-lg justify-evenly w-30 hover:cursor-pointer focus:outline-1 focus:outline-white"
                 title="Days Drop Down"

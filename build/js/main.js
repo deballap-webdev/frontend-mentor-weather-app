@@ -16,17 +16,20 @@ import Location from "./Location.js";
 const currentLocation = new Location();
 const initApp = () => {
   //Add Listeners
+  const daysContainer = document.getElementById("daysContainer");
   const unitBtn = document.getElementById("toggleUnit");
-  unitBtn.addEventListener("click", dropDownDisplay);
-  unitBtn.addEventListener("focusout", dropDownDisplay);
+  const unitContainer = document.getElementById("unitContainer");
   const dayButton = document.getElementById("chooseDay");
-  dayButton.addEventListener("click", dropDownDisplay);
-  dayButton.addEventListener("focusout", dropDownDisplay);
   const searchForm = document.getElementById("searchForm");
-  searchForm.addEventListener("submit", submitLocation);
   const unitsDropDown = document.getElementById("unitsDropDown");
-  unitsDropDown.addEventListener("click", updateUnitAndDisplay);
   const daysDropDown = document.getElementById("daysDropDown");
+
+  unitBtn.addEventListener("click", dropDownDisplay);
+  // unitBtn.addEventListener("focusout", dropDownDisplay);
+  dayButton.addEventListener("click", dropDownDisplay);
+  //  dayButton.addEventListener("focusout", dropDownDisplay);
+  searchForm.addEventListener("submit", submitLocation);
+  unitsDropDown.addEventListener("click", updateUnitAndDisplay);
   daysDropDown.addEventListener("click", handleHourlyData);
 
   loadThePage();

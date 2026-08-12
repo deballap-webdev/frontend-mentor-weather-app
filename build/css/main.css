@@ -234,29 +234,17 @@
   .hidden {
     display: none;
   }
-  .table {
-    display: table;
-  }
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
-  .h-5 {
-    height: calc(var(--spacing) * 5);
-  }
   .h-5\.25 {
     height: calc(var(--spacing) * 5.25);
   }
-  .h-71 {
-    height: calc(var(--spacing) * 71);
-  }
   .h-71\.5 {
     height: calc(var(--spacing) * 71.5);
-  }
-  .h-162 {
-    height: calc(var(--spacing) * 162);
   }
   .h-162\.75 {
     height: calc(var(--spacing) * 162.75);
@@ -270,17 +258,11 @@
   .min-h-screen {
     min-height: 100vh;
   }
-  .w-3 {
-    width: calc(var(--spacing) * 3);
-  }
   .w-3\.25 {
     width: calc(var(--spacing) * 3.25);
   }
   .w-4 {
     width: calc(var(--spacing) * 4);
-  }
-  .w-5 {
-    width: calc(var(--spacing) * 5);
   }
   .w-5\.25 {
     width: calc(var(--spacing) * 5.25);
@@ -315,23 +297,14 @@
   .min-w-12 {
     min-width: calc(var(--spacing) * 12);
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink {
     flex-shrink: 1;
-  }
-  .flex-grow {
-    flex-grow: 1;
-  }
-  .border-collapse {
-    border-collapse: collapse;
   }
   .rotate-180 {
     rotate: 180deg;
   }
-  .resize {
-    resize: both;
+  .scrollbar-none {
+    scrollbar-width: none;
   }
   .flex-col {
     flex-direction: column;
@@ -359,6 +332,9 @@
   }
   .justify-evenly {
     justify-content: space-evenly;
+  }
+  .gap-1 {
+    gap: var(--spacing);
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
@@ -388,6 +364,9 @@
   .bg-CONTAINER-BGCOLOR {
     background-color: var(--color-CONTAINER-BGCOLOR);
   }
+  .bg-LIGHT-BGCOLOR {
+    background-color: var(--color-LIGHT-BGCOLOR);
+  }
   .bg-LIGHT-BORDER-COLOR {
     background-color: var(--color-LIGHT-BORDER-COLOR);
   }
@@ -412,14 +391,8 @@
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
-  .p-5 {
-    padding: calc(var(--spacing) * 5);
-  }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
-  }
-  .px-5 {
-    padding-inline: calc(var(--spacing) * 5);
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
@@ -429,9 +402,6 @@
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
-  }
-  .pb-5 {
-    padding-bottom: calc(var(--spacing) * 5);
   }
   .text-center {
     text-align: center;
@@ -475,15 +445,11 @@
   .italic {
     font-style: italic;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .\[-ms-overflow-style\:none\] {
+    -ms-overflow-style: none;
   }
   .focus-within\:outline-1:focus-within {
     outline-style: var(--tw-outline-style);
@@ -558,6 +524,9 @@
       width: min(100%, 800px);
     }
   }
+  .\[\&\:\:-webkit-scrollbar\]\:hidden::-webkit-scrollbar {
+    display: none;
+  }
 }
 .current-card {
   margin-top: calc(var(--spacing) * 2);
@@ -627,6 +596,7 @@
   z-index: 10;
   width: calc(var(--spacing) * 60);
   flex-direction: column;
+  gap: var(--spacing);
   border-radius: var(--radius-lg);
   border-style: var(--tw-border-style);
   border-width: 1px;
@@ -678,6 +648,7 @@
   z-index: 10;
   width: calc(var(--spacing) * 60);
   flex-direction: column;
+  gap: var(--spacing);
   border-radius: var(--radius-lg);
   border-style: var(--tw-border-style);
   border-width: 1px;
@@ -715,11 +686,6 @@
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
-}
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
 }
 @property --tw-blur {
   syntax: "*";
@@ -773,6 +739,11 @@
 @property --tw-drop-shadow-size {
   syntax: "*";
   inherits: false;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
 @property --tw-shadow {
   syntax: "*";
@@ -844,7 +815,6 @@
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
       --tw-font-weight: initial;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
@@ -858,6 +828,7 @@
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
+      --tw-outline-style: solid;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
