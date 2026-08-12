@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="images/favicon-32x32.png" />
-    <script src="js/main.js" type="module"></script>
+    <!--  <script src="js/main.js" type="module"></script> -->
     <title>front-end mentor's weather app challenge</title>
   </head>
   <body
@@ -64,7 +64,7 @@
         </div>
       </div>
     </header>
-    <main class="flex justify-center items-center flex-col">
+    <main class="flex justify-center items-center flex-col hidden">
       <h1 class="absolute -left-10000">
         Front End Mentor's Intermediate Weather App Challenge
       </h1>
@@ -342,5 +342,30 @@
 
       <p id="confirmation" class="-left-10000" aria-live="assertive"></p>
     </main>
+    <section
+      class="flex flex-col gap-4 items-center max-w-83 md:max-w-100 lg:max-w-130 mt-20 mx-auto"
+    >
+      <img
+        src="images/icon-error.svg"
+        alt="Error Icon"
+        width="18"
+        height="18"
+        class="w-8 h-8"
+      />
+      <p
+        class="text-3xl md:text-4xl lg:text-5xl font-HEADER-FONT font-semibold text-center"
+      >
+        Something went wrong
+      </p>
+      <p class="text-center">
+        we couldn't connect to the server (<span>API error</span>), Please try
+        again in a few moments
+      </p>
+      <button
+        class="bg-LIGHT-BGCOLOR px-4 py-2 w-25 flex justify-between hover:cursor-pointer rounded-lg"
+      >
+        <img src="images/icon-retry.svg" alt="Retry Icon" /> Retry
+      </button>
+    </section>
   </body>
 </html>

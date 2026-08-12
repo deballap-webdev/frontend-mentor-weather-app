@@ -7,7 +7,7 @@ export const getCoordsFromApi = async (entryText) => {
     const coordsJson = await coordsStream.json();
     return coordsJson;
   } catch (err) {
-    console.err(err.stack);
+    console.error(err.stack);
   }
 };
 

@@ -13,8 +13,6 @@ export const dropDownDisplay = (event, elemToHide) => {
   }
 };
 
-export const apiErrorDisplay = (text) => {};
-
 const hideDropDown = (elem) => {
   elem
     .querySelector('img[data-dropDown="true"]')
