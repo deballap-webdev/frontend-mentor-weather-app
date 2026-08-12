@@ -94,33 +94,17 @@ const updateUnitAndDisplay = (event) => {
 };
 
 const updateDataAndDisplay = async () => {
-  const coordsObj = {
-    lat: currentLocation.getLat(),
-    lon: currentLocation.getLon(),
-    wind: currentLocation.getWind(),
-    precipt: currentLocation.getPrecipt(),
-    temp: currentLocation.getTemp(),
-  };
-  const weatherJson = await getWeatherFromApi(coordsObj);
+  const weatherJson = await getWeatherFromApi(currentLocation);
   updateDisplay(weatherJson);
 };
 
 const handleHourlyData = async (event) => {
-  const locationObj = {
-    lat: currentLocation.getLat(),
-    lon: currentLocation.getLon(),
-    name: currentLocation.getName(),
-    wind: currentLocation.getWind(),
-    temp: currentLocation.getTemp(),
-    precipt: currentLocation.getPrecipt(),
-  };
-  const weatherJson = await getWeatherFromApi(locationObj);
+  const weatherJson = await getWeatherFromApi(currentLocation);
   const hourlyJson = weatherJson.hourly;
   const hourlyData = getHourlyData(
     event.target.closest("button").dataset.day,
     hourlyJson,
   );
-
   updateDisplay(weatherJson, currentLocation, hourlyData);
 };
 document.addEventListener("DOMContentLoaded", initApp);

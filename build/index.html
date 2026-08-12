@@ -119,7 +119,7 @@
       <div
         class="flex flex-wrap w-[min(100%,1250px)] gap-6 mx-auto justify-center items-center mt-6"
       >
-        <div>
+        <div class="w-[min(100%,800px)]" id="me">
           <section aria-labelledby="currentHeader" class="mb-6">
             <h2 id="currentHeader" class="absolute -left-10000">
               Current Weather Conditions
@@ -128,7 +128,7 @@
               class="bg-[url(../images/bg-today-small.svg)] p-4 h-71.5 mb-4 bg-center bg-cover bg-no-repeat flex flex-wrap justify-between items-center md:bg-[url(../images/bg-today-large.svg)] rounded-3xl md:max-w-200"
               id="currentWeather"
             >
-              <div class="text-center mx-auto md:text-left md:mx-0">
+              <!-- <div class="text-center mx-auto md:text-left md:mx-0">
                 <div class="font-bold text-3xl mb-4">Berlin, Germany</div>
                 <div>Tuesday, Aug 5, 2025</div>
               </div>
@@ -143,14 +143,14 @@
                   alt="sunny icon"
                 />
                 <div class="text-7xl italic font-semibold">20°</div>
-              </div>
+              </div> -->
             </section>
 
             <section
               id="currentWeather__details"
               class="flex flex-wrap gap-4 justify-center items-center"
             >
-              <div class="current-card">
+              <!-- <div class="current-card">
                 <div>Feels Like</div>
                 <div class="text-2xl">64°</div>
               </div>
@@ -165,7 +165,7 @@
               <div class="current-card">
                 <div>Percipitation</div>
                 <div class="text-2xl">0 in</div>
-              </div>
+              </div> -->
             </section>
           </section>
           <a
@@ -175,8 +175,8 @@
           >
           <section aria-labelledby="dailyHeader" class="max-w-200">
             <h2 class="mb-4" id="dailyHeader">Daily Forecast</h2>
-            <div class="flex flex-wrap gap-4">
-              <div class="daily-card">
+            <div class="flex flex-wrap gap-4" id="dailyWeather">
+              <!-- <div class="daily-card">
                 <div>Tue</div>
                 <img src="images/icon-drizzle.webp" alt="" />
                 <div class="temp">
@@ -231,21 +231,23 @@
                   <div>68°</div>
                   <div>57°</div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </section>
         </div>
         <a
-          href="#hourlyWeather"
+          href="#hourlyHeader"
           class="absolute top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
           >Skip to Hourly Forecast</a
         >
-        <!--TODO remember to put alt text and tittles for images when you run javascript-->
+
         <section
-          class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR p-5 rounded-lg w-[min(100%,400px)] 1290:w-[min(100%,800px)]"
+          class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR rounded-lg w-[min(100%,400px)] 1290:w-[min(100%,800px)] overflow-y-auto h-162.75"
           aria-labelledby="hourlyHeader"
         >
-          <div class="flex w-full justify-between items-start">
+          <div
+            class="flex w-full justify-between items-start sticky top-0 z-10 bg-CONTAINER-BGCOLOR p-4"
+          >
             <h2 id="hourlyHeader">Hourly Forecast</h2>
             <div class="flex flex-col items-end relative">
               <button
@@ -269,75 +271,78 @@
                 id="daysDropDown"
                 aria-expanded="false"
               >
-                <button class="day" data-day="monday">Monday</button>
-                <button class="day" data-day="tuesday">Tuesday</button>
-                <button class="day" data-day="wednesday">Wednesday</button>
-                <button class="day" data-day="thursday">Thursday</button>
-                <button class="day" data-day="friday">Friday</button>
-                <button class="day" data-day="saturday">Saturday</button>
-                <button class="day" data-day="sunday">Sunday</button>
+                <button class="day" data-day="Monday">Monday</button>
+                <button class="day" data-day="Tuesday">Tuesday</button>
+                <button class="day" data-day="Wednesday">Wednesday</button>
+                <button class="day" data-day="Thursday">Thursday</button>
+                <button class="day" data-day="Friday">Friday</button>
+                <button class="day" data-day="Saturday">Saturday</button>
+                <button class="day" data-day="Sunday">Sunday</button>
               </div>
             </div>
           </div>
 
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
+          <div id="hourlyWeather" class="px-4 pb-4">
+            <!-- <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
             </div>
-            <div>68°</div>
-          </div>
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
+            <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
             </div>
-            <div>68°</div>
-          </div>
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
+            <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
             </div>
-            <div>68°</div>
-          </div>
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
+            <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
             </div>
-            <div>68°</div>
-          </div>
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
+            <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
             </div>
-            <div>68°</div>
-          </div>
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
+            <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
             </div>
-            <div>68°</div>
-          </div>
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
+            <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
             </div>
-            <div>68°</div>
-          </div>
-          <div class="hourly-card">
-            <div class="icon-time">
-              <img src="images/icon-fog.webp" alt="" />
-              <div>3 PM</div>
-            </div>
-            <div>68°</div>
+            <div class="hourly-card">
+              <div class="icon-time">
+                <img src="images/icon-fog.webp" alt="" />
+                <div>3 PM</div>
+              </div>
+              <div>68°</div>
+            </div> -->
           </div>
         </section>
       </div>
+
       <p id="confirmation" class="-left-10000" aria-live="assertive"></p>
     </main>
   </body>

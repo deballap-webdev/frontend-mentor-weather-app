@@ -40,7 +40,7 @@ export const generateName = (result) => {
 
 export const getWeatherFromApi = async (locationObj) => {
   const weatherStream = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${locationObj.lat}&longitude=${locationObj.lon}&wind_speed_unit=${locationObj.wind}&precipitation_unit=${locationObj.precipt}&temperature_unit=${locationObj.temp}&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_min,temperature_2m_max&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,wind_speed_10m,weather_code&timezone=auto`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${locationObj.getLat()}&longitude=${locationObj.getLon()}&wind_speed_unit=${locationObj.getWind()}&precipitation_unit=${locationObj.getPrecipt()}&temperature_unit=${locationObj.getTemp()}&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_min,temperature_2m_max&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,wind_speed_10m,weather_code&timezone=auto`,
   );
   const weatherJson = await weatherStream.json();
   return weatherJson;
@@ -85,47 +85,36 @@ export const getUnits = (event) => {
   }
 };
 
-export const getHourlyData = (day, houlyJson) => {
-  console.log(houlyJson);
-  const timeArray = houlyJson.time;
-  const tempArray = houlyJson.temperature_2m;
-  const codeArray = houlyJson.weather_code;
-  const dayLookup = {
-    monday: {
-      time: timeArray.slice(0, 23),
-      temp: tempArray.slice(0, 23),
-      code: codeArray.slice(0, 23),
-    },
-    tuesday: {
-      time: timeArray.slice(24, 47),
-      temp: tempArray.slice(24, 47),
-      code: codeArray.slice(24, 47),
-    },
-    wednesday: {
-      time: timeArray.slice(48, 71),
-      temp: tempArray.slice(48, 71),
-      code: codeArray.slice(48, 71),
-    },
-    thursday: {
-      time: timeArray.slice(72, 95),
-      temp: tempArray.slice(72, 95),
-      code: codeArray.slice(72, 95),
-    },
-    friday: {
-      time: timeArray.slice(96, 119),
-      temp: tempArray.slice(96, 119),
-      code: codeArray.slice(96, 119),
-    },
-    saturday: {
-      time: timeArray.slice(120, 143),
-      temp: tempArray.slice(120, 143),
-      code: codeArray.slice(120, 143),
-    },
-    sunday: {
-      time: timeArray.slice(144, 167),
-      temp: tempArray.slice(144, 167),
-      code: codeArray.slice(144, 167),
-    },
+export const getHourlyData = (day, hourlyJson) => {
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const dayFilteredTime = hourlyJson.time.filter((date) => {
+    return (
+      new Date(date).toLocaleDateString("en-US", {
+        weekday: "long",
+      }) === day
+    );
+  });
+  const hours = dayFilteredTime.map((date) =>
+    new Date(date).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      hour12: true,
+    }),
+  );
+  const start = hourlyJson.time.indexOf(dayFilteredTime[0]);
+  const end =
+    hourlyJson.time.indexOf(dayFilteredTime[dayFilteredTime.length - 1]) + 1;
+  if (days.indexOf(day) === -1) return;
+  return {
+    time: hours,
+    temp: hourlyJson.temperature_2m.slice(start, end),
+    code: hourlyJson.weather_code.slice(start, end),
   };
-  return dayLookup[day];
 };

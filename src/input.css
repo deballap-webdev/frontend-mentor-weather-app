@@ -15,7 +15,7 @@
 }
 
 .hourly-card {
-  @apply flex items-center justify-between my-4 p-2 bg-LIGHT-BGCOLOR rounded-lg border border-solid border-LIGHT-BORDER-COLOR;
+  @apply flex items-center justify-between mb-4 p-2 bg-LIGHT-BGCOLOR rounded-lg border border-solid border-LIGHT-BORDER-COLOR;
   & > .icon-time {
     @apply w-25 flex items-center;
     img {

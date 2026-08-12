@@ -5,7 +5,8 @@ export const dropDownDisplay = (event) => {
       .classList.toggle("rotate-180");
     event.currentTarget.nextElementSibling.classList.toggle("hidden");
     event.currentTarget.nextElementSibling.classList.toggle("flex");
-    event.target.ariaExpanded === "true" ? "false" : "true";
+    event.target.ariaExpanded =
+      event.target.ariaExpanded === "true" ? "false" : "true";
   } else {
     setTimeout(hideDropDown, 300, event);
   }
@@ -22,24 +23,25 @@ const hideDropDown = (event) => {
 export const switchUnitBtnDisplay = (locationObj) => {
   const imperialBtn = document.querySelector("[data-name='imperialBtn']");
   const metricBtn = document.querySelector("[data-name='metricBtn']");
-  if (
-    locationObj.getWind() === "mph" &&
-    locationObj.getTemp() === "fahrenheit" &&
-    locationObj.getPrecipt() === "inch"
-  ) {
-    hide(imperialBtn);
-    show(metricBtn);
-  } else if (
-    locationObj.getWind() === "kmh" &&
-    locationObj.getTemp() === "celsius" &&
-    locationObj.getPrecipt() === "mm"
-  ) {
-    hide(metricBtn);
-    show(imperialBtn);
-  } else {
-    show(metricBtn);
-    show(imperialBtn);
-  }
+  const signature = `${locationObj.getWind()}-${locationObj.getTemp()}-${locationObj.getPrecipt()}`;
+  const signatureLookUp = {
+    "mph-fahrenheit-inch": () => {
+      hide(imperialBtn);
+      show(metricBtn);
+    },
+    "kmh-celsius-mm": () => {
+      hide(metricBtn);
+      show(imperialBtn);
+    },
+    default: () => {
+      show(metricBtn);
+      show(imperialBtn);
+    },
+  };
+  const action = signatureLookUp[signature]
+    ? signatureLookUp[signature]
+    : signatureLookUp["default"];
+  action();
 };
 
 const hide = (elem) => {
@@ -53,19 +55,45 @@ const show = (elem) => {
 };
 
 export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
+  const currentWeather = document.getElementById("currentWeather");
+  const currentDetails = document.getElementById("currentWeather__details");
+  const dailyWeather = document.getElementById("dailyWeather");
+  const hourlyWeather = document.getElementById("hourlyWeather");
+
+  clearElem([currentWeather, currentDetails, dailyWeather, hourlyWeather]);
   const currentWeatherArray = createCurrentWeatherDivs(
     locationObj,
     weatherJson,
   );
-
   const currentDetailsArray = createCurrentDetailsDivs(
     locationObj,
     weatherJson.current,
   );
-
   const dailyWeatherArray = createDailyDivs(weatherJson.daily);
+  const hourlyWeatherArray = createHourlyDivs(hourlyJson);
+
+  currentDetailsArray.forEach((div) => {
+    currentDetails.append(div);
+  });
+
+  currentWeatherArray.forEach((div) => {
+    currentWeather.append(div);
+  });
+
+  dailyWeatherArray.forEach((div) => {
+    dailyWeather.append(div);
+  });
+
+  hourlyWeatherArray.forEach((div) => {
+    hourlyWeather.append(div);
+  });
+
+  setFocusOnSearch();
 };
 
+const setFocusOnSearch = () => {
+  document.getElementById("searchInput").focus();
+};
 const createCurrentWeatherDivs = (locationObj, weatherJson) => {
   const nameDateContainer = createElem([
     "text-center",
@@ -75,7 +103,7 @@ const createCurrentWeatherDivs = (locationObj, weatherJson) => {
   ]);
   const name = createElem(
     ["font-bold", "text-3xl", "mb-4"],
-    `${locationObj.name}`,
+    `${locationObj.getName()}`,
   );
   const date = createElem(
     [],
@@ -136,7 +164,7 @@ const createCurrentDetailsDivs = (locationObj, currentWeather) => {
 
 const createDailyDivs = (dailyJson) => {
   const dailyDivArray = [];
-  for (let i = 0; i <= 7; i++) {
+  for (let i = 0; i <= 6; i++) {
     const day = createElem(
       [],
       `${new Date(dailyJson.time[i]).toLocaleDateString("en-US", {
@@ -145,13 +173,26 @@ const createDailyDivs = (dailyJson) => {
     );
     const img = buildIcon(dailyJson.weather_code[i]);
     const tempCard = createCard("temp", [
-      createElem([], `${Math.round(dailyJson.temperature_2m_max)}°`),
-      createElem([], `${Math.round(dailyJson.temperature_2m_min)}°`),
+      createElem([], `${Math.round(dailyJson.temperature_2m_max[i])}°`),
+      createElem([], `${Math.round(dailyJson.temperature_2m_min[i])}°`),
     ]);
     const dailyCard = createCard("daily-card", [day, img, tempCard]);
     dailyDivArray.push(dailyCard);
   }
   return dailyDivArray;
+};
+
+const createHourlyDivs = (hourlyJson) => {
+  const hourlyDivArray = [];
+  for (let i = 0; i <= 23; i++) {
+    const icon = buildIcon(hourlyJson.code[i]);
+    const time = createElem([], hourlyJson.time[i]);
+    const iconTimeCard = createCard("icon-time", [icon, time]);
+    const temp = createElem([], `${Math.round(hourlyJson.temp[i])}°`);
+    const hourlyCard = createCard("hourly-card", [iconTimeCard, temp]);
+    hourlyDivArray.push(hourlyCard);
+  }
+  return hourlyDivArray;
 };
 
 const createCard = (cardClass, childrenArray) => {
@@ -165,10 +206,10 @@ const createCard = (cardClass, childrenArray) => {
 const buildIcon = (weatherCode, width, height) => {
   const img = document.createElement("img");
   const weatherDetails = getWeatherDetails(weatherCode);
-  img.alt = weatherDetails.iconName + "icon";
-  img.title = weatherDetails.iconName + "icon";
-  img.width = width;
-  img.height = height;
+  img.alt = weatherDetails.iconName + " icon";
+  img.title = weatherDetails.iconName + " icon";
+  if (width) img.width = width;
+  if (height) img.height = height;
   img.src = `images/icon-${weatherDetails.iconName}.webp`;
   return img;
 };
@@ -184,6 +225,14 @@ const createElem = (classListArray, textContent) => {
     div.textContent = textContent;
   }
   return div;
+};
+
+const clearElem = (elemArray) => {
+  elemArray.forEach((elem) => {
+    while (elem.lastElementChild) {
+      elem.lastElementChild.remove();
+    }
+  });
 };
 
 const getWeatherDetails = (weatherCode) => {
