@@ -6,7 +6,6 @@ import {
   createHourlyDivs,
   createDailyDivs,
 } from "./createCards.js";
-
 export const dropDownDisplay = (event, elemToHide) => {
   if (event.type === "click") {
     event.currentTarget
@@ -30,11 +29,12 @@ const hideDropDown = (elem) => {
   elem.ariaExpanded = "false";
 };
 
-export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
+export const updateDisplay = (weatherJson, locationObj, hourlyJson, date) => {
   renderCurrentWeather(weatherJson, locationObj);
   renderCurrentDetails(weatherJson.current, locationObj);
   renderDailyWeather(weatherJson);
   renderHourlyWeather(hourlyJson);
+  updateDescriptonText(weatherJson.current.weather_code);
   setFocusOnSearch();
 };
 
@@ -80,11 +80,9 @@ export const renderHourlyWeather = (hourlyJson) => {
   });
 };
 
-const updateDescriptonText = () => {
+const updateDescriptonText = (weatherCode) => {
   const headerDesc = document.getElementById("headerDesc");
-  headerDesc.textContent = getWeatherDetails(
-    weatherJson.current.weather_code,
-  ).desc;
+  headerDesc.textContent = getWeatherDetails(weatherCode).desc;
 };
 
 const setFocusOnSearch = () => {

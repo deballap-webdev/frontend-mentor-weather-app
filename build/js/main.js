@@ -48,6 +48,11 @@ const initApp = () => {
 
 const loadThePage = async (event) => {
   getGeolocation();
+  const date = `${new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+  })}`;
+  switchDayBtnDisplay(date);
+  switchUnitBtnDisplay(currentLocation);
 };
 
 const getGeolocation = async () => {
@@ -126,11 +131,12 @@ const updateDataAndDisplay = async () => {
     weekday: "long",
   })}`;
   const filteredHourlyJson = filterHourlyData(date, weatherJson.hourly);
-  updateDisplay(weatherJson, currentLocation, filteredHourlyJson, date);
+  updateDisplay(weatherJson, currentLocation, filteredHourlyJson);
   storeWeatherJson(weatherJson);
 };
 
 const handleDayToggle = (event) => {
+  if (!event.target.closest("button")) return;
   const weatherString = getWeatherJson();
   if (typeof weatherString !== "string") return;
   const weatherJson = JSON.parse(weatherString);

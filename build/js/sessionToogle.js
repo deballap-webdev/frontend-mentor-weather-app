@@ -1,7 +1,7 @@
 import { hide, show, buildIcon } from "./Utilities.js";
 export const switchUnitBtnDisplay = (locationObj) => {
   const signature = `${locationObj.getWind()}-${locationObj.getTemp()}-${locationObj.getPrecipt()}`;
-  toggleBtnDisplay(signature);
+  toggleUnitBtnDisplay(signature);
   checkActiveUnits(signature);
 };
 
@@ -47,7 +47,7 @@ const checkActiveUnits = (signature) => {
   });
 };
 
-const updateDayBtnText = (date) => {
+export const updateDayBtnText = (date) => {
   const day = document.getElementById("day");
   day.textContent = date;
 };

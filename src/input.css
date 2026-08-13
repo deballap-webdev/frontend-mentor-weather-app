@@ -50,9 +50,9 @@
 }
 
 .days-drop-down {
-  @apply flex-col gap-1 bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR border border-solid w-60 rounded-lg p-2 top-13 shadow-2xl/70 absolute z-10;
+  @apply flex-col gap-1  bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR border border-solid w-60 rounded-lg p-2 top-13 shadow-2xl/70 absolute z-10;
   & > .day {
-    @apply hover:cursor-pointer min-w-12 min-h-12 text-left hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
+    @apply hover:cursor-pointer flex justify-between min-w-12 min-h-12 text-left  hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
   }
 }
 
