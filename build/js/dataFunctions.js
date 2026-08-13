@@ -118,3 +118,7 @@ export const getHourlyData = (day, hourlyJson) => {
     code: hourlyJson.weather_code.slice(start, end),
   };
 };
+
+export const storeWeatherJson = (weatherJson) => {
+  sessionStorage.setItem("myWeather", JSON.stringify(weatherJson));
+};

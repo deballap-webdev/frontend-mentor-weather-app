@@ -5,6 +5,7 @@ import {
   getWeatherFromApi,
   getUnits,
   getHourlyData,
+  storeWeatherJson,
 } from "./dataFunctions.js";
 import {
   dropDownDisplay,
@@ -12,6 +13,7 @@ import {
   switchUnitBtnDisplay,
   apiErrorDisplay,
 } from "./domFunctions.js";
+import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToogle.js";
 import Location from "./Location.js";
 
 const currentLocation = new Location();
@@ -107,17 +109,24 @@ const updateUnitAndDisplay = (event) => {
   updateDataAndDisplay();
 };
 
-const updateDataAndDisplay = async (event) => {
-  console.log(currentLocation);
+const updateDataAndDisplay = async () => {
   const weatherJson = await getWeatherFromApi(currentLocation);
-  const date = !event
-    ? `${new Date().toLocaleDateString("en-US", {
-        weekday: "long",
-      })}`
-    : event.taregt.closest("button").dataset.day;
-  console.log(weatherJson);
-  console.log(weatherJson.hourly);
-  const hourlyData = getHourlyData(date, weatherJson.hourly);
+  const date = `${new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+  })}`;
+
+  getHourlyData(date, weatherJson.hourly);
   updateDisplay(weatherJson, currentLocation, hourlyData, date);
+  storeWeatherJson(weatherJson);
 };
+
+const handleDayToggle = (event) => {
+  const weatherJson = JSON.parse(sessionStorage.getItem("myWeather"));
+  const hourlyJson = weatherJson.hourly;
+  const date = event.target.closest("button").dataset.day;
+  const data = getHourlyData(date, weatherJson.hourly);
+
+  updateHourlyDisplay(hourlyJson);
+};
+
 document.addEventListener("DOMContentLoaded", initApp);
