@@ -40,10 +40,10 @@ export default class Location {
 
   setLocation(locationObj) {
     const { lat, lon, name, wind, temp, precipt } = locationObj;
-    if (lat) {
+    if (lat || lat === 0) {
       this.#lat = lat;
     }
-    if (lon) {
+    if (lon || lon === 0) {
       this.#lon = lon;
     }
     if (name) {
