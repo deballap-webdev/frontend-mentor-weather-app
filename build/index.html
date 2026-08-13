@@ -64,7 +64,7 @@
         </div>
       </div>
     </header>
-    <main class="flex justify-center items-center flex-col hidden">
+    <main class="flex justify-center items-center flex-col">
       <h1 class="absolute -left-10000">
         Front End Mentor's Intermediate Weather App Challenge
       </h1>
@@ -110,7 +110,7 @@
       </section>
       <a
         href="#dailyHeader"
-        class="absolute top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
+        class="absolute -top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
         >Skip to Current Weather</a
       >
       <div
@@ -167,7 +167,7 @@
           </section>
           <a
             href="#dailyHeader"
-            class="absolute top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
+            class="absolute -top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
             >Skip to Daily Forecast</a
           >
           <section aria-labelledby="dailyHeader" class="max-w-200">
@@ -234,7 +234,7 @@
         </div>
         <a
           href="#hourlyHeader"
-          class="absolute top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
+          class="absolute -top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
           >Skip to Hourly Forecast</a
         >
 
@@ -344,6 +344,7 @@
     </main>
     <section
       class="flex flex-col gap-4 items-center max-w-83 md:max-w-100 lg:max-w-130 mt-20 mx-auto"
+      id="errorDisplay"
     >
       <img
         src="images/icon-error.svg"
