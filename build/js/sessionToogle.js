@@ -1,4 +1,4 @@
-import { hide, show } from "./Utilities";
+import { hide, show, buildIcon } from "./Utilities.js";
 export const switchUnitBtnDisplay = (locationObj) => {
   const signature = `${locationObj.getWind()}-${locationObj.getTemp()}-${locationObj.getPrecipt()}`;
   toggleBtnDisplay(signature);

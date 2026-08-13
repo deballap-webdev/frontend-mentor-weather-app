@@ -26,11 +26,11 @@ const hideDropDown = (elem) => {
   elem
     .querySelector('img[data-dropDown="true"]')
     .classList.remove("rotate-180");
-  thide(elem.nextElementSibling);
+  hide(elem.nextElementSibling);
   elem.ariaExpanded = "false";
 };
 
-const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
+export const updateDisplay = (weatherJson, locationObj, hourlyJson) => {
   renderCurrentWeather(weatherJson, locationObj);
   renderCurrentDetails(weatherJson.current, locationObj);
   renderDailyWeather(weatherJson);
@@ -71,7 +71,7 @@ const renderCurrentDetails = (currentJson, locationObj) => {
   });
 };
 
-const renderHourlyWeather = (hourlyJson) => {
+export const renderHourlyWeather = (hourlyJson) => {
   const hourlyWeather = document.getElementById("hourlyWeather");
   clearElem(hourlyWeather);
   const hourlyWeatherArray = createHourlyDivs(hourlyJson);

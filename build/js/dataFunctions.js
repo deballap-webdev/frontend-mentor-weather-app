@@ -85,7 +85,7 @@ export const getUnits = (event) => {
   }
 };
 
-export const getHourlyData = (day, hourlyJson) => {
+export const filterHourlyData = (day, hourlyJson) => {
   const days = [
     "Monday",
     "Tuesday",
@@ -121,4 +121,54 @@ export const getHourlyData = (day, hourlyJson) => {
 
 export const storeWeatherJson = (weatherJson) => {
   sessionStorage.setItem("myWeather", JSON.stringify(weatherJson));
+};
+
+export const getWeatherJson = () => {
+  return sessionStorage.getItem("myWeather");
+};
+
+export const storeSessionDate = (date) => {
+  sessionStorage.setItem("myDate", JSON.stringify(date));
+};
+
+export const getSessionDate = () => {
+  return sessionStorage.getItem("myDate");
+};
+
+export const getWeatherDetails = (weatherCode) => {
+  const weatherCodeLookup = {
+    0: { desc: "Clear Sky", iconName: "sunny" },
+    1: { desc: "Mainly Clear", iconName: "sunny" },
+    2: { desc: "Partly Cloudy", iconName: "partly-cloudy" },
+    3: { desc: "Overcast", iconName: "overcast" },
+    45: { desc: "Fog", iconName: "fog" },
+    48: { desc: "Depositing Rime Fog", iconName: "fog" },
+    51: { desc: "Light Drizzle", iconName: "drizzle" },
+    53: { desc: "Moderate Drizzle", iconName: "drizzle" },
+    55: { desc: "Dense Drizzle", iconName: "drizzle" },
+    56: { desc: "Light Freezing Drzzle", iconName: "drizzle" },
+    57: { desc: "Dense Freezing Drizzle", iconName: "drizzle" },
+    61: { desc: "Light Rain", iconName: "rain" },
+    63: { desc: "Moderate Rain", iconName: "rain" },
+    65: { desc: "Heavy Rain", iconName: "rain" },
+    66: { desc: "Light Freezing Rain", iconName: "rain" },
+    67: { desc: "Heavy Freezing Rain", iconName: "rain" },
+    71: { desc: "Light Snow", iconName: "snow" },
+    73: { desc: "Moderate Snow", iconName: "snow" },
+    75: { desc: "Heavy Snow", iconName: "snow" },
+    77: { desc: "Snow Grains", iconName: "snow" },
+    80: { desc: "Light Rain Showers", iconName: "rain" },
+    81: { desc: "Moderate Rain Showers", iconName: "rain" },
+    82: { desc: "Voilent Rain Showers", iconName: "rain" },
+    85: { desc: "Light Snow Showers", iconName: "snow" },
+    86: { desc: "Heavy Snow Showers", iconName: "snow" },
+    95: { desc: "Thunderstorm", iconName: "storm" },
+    96: { desc: "Thunderstorm with Slight Hail", iconName: "snow" },
+    99: { desc: "Thunderstorm with Heavy Hail", iconName: "snow" },
+  };
+
+  return {
+    desc: weatherCodeLookup[weatherCode].desc,
+    iconName: weatherCodeLookup[weatherCode].iconName,
+  };
 };

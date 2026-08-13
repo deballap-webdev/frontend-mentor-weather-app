@@ -1,3 +1,4 @@
+import { getWeatherDetails } from "./dataFunctions.js";
 import { createCard, buildIcon, createElem } from "./Utilities.js";
 export const createCurrentWeatherDivs = (locationObj, weatherJson) => {
   const nameDateContainer = createElem([
@@ -76,13 +77,13 @@ export const createDailyDivs = (dailyJson) => {
         weekday: "short",
       })}`,
     );
-    const iconName = getWeatherDetails(dailyJson.weather_code[i]).desc;
+    const iconName = getWeatherDetails(dailyJson.weather_code[i]).iconName;
     const icon = buildIcon(iconName, "webp");
     const tempCard = createCard("temp", [
       createElem([], `${Math.round(dailyJson.temperature_2m_max[i])}°`),
       createElem([], `${Math.round(dailyJson.temperature_2m_min[i])}°`),
     ]);
-    const dailyCard = createCard("daily-card", [day, img, tempCard]);
+    const dailyCard = createCard("daily-card", [day, icon, tempCard]);
     dailyDivArray.push(dailyCard);
   }
   return dailyDivArray;

@@ -4,16 +4,20 @@ import {
   generateName,
   getWeatherFromApi,
   getUnits,
-  getHourlyData,
+  filterHourlyData,
   storeWeatherJson,
+  storeSessionDate,
+  getSessionDate,
+  getWeatherJson,
 } from "./dataFunctions.js";
 import {
   dropDownDisplay,
   updateDisplay,
-  switchUnitBtnDisplay,
-  apiErrorDisplay,
+  renderHourlyWeather,
 } from "./domFunctions.js";
+import { apiErrorDisplay } from "./apiErrorFunctions.js";
 import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToogle.js";
+
 import Location from "./Location.js";
 
 const currentLocation = new Location();
@@ -37,7 +41,7 @@ const initApp = () => {
   });
   searchForm.addEventListener("submit", submitLocation);
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
-  daysDropDown.addEventListener("click", updateDataAndDisplay);
+  daysDropDown.addEventListener("click", handleDayToggle);
 
   loadThePage();
 };
@@ -79,13 +83,13 @@ const submitLocation = async (event) => {
   if (!searchText) return;
   const coordsJson = await getCoordsFromApi(searchText);
   if (handleError(coordsJson)) return;
-
   const coordsObj = {
     lat: coordsJson.results[0].latitude,
     lon: coordsJson.results[0].longitude,
     name: generateName(coordsJson.results[0]),
   };
   currentLocation.setLocation(coordsObj);
+  updateDataAndDisplay();
 };
 
 const handleError = (apiData) => {
@@ -105,8 +109,15 @@ const updateUnitAndDisplay = (event) => {
   const unitObj = getUnits(event);
   if (!unitObj) return;
   currentLocation.setLocation(getUnits(event));
+  //convertBtwUnits(currentLocation);
   switchUnitBtnDisplay(currentLocation);
-  updateDataAndDisplay();
+  const dateString = getSessionDate();
+  const date =
+    typeof dateString === "string"
+      ? JSON.parse(dateString)
+      : `${new Date().toLocaleDateString("en-US", {
+          weekday: "long",
+        })}`;
 };
 
 const updateDataAndDisplay = async () => {
@@ -114,19 +125,21 @@ const updateDataAndDisplay = async () => {
   const date = `${new Date().toLocaleDateString("en-US", {
     weekday: "long",
   })}`;
-
-  getHourlyData(date, weatherJson.hourly);
-  updateDisplay(weatherJson, currentLocation, hourlyData, date);
+  const filteredHourlyJson = filterHourlyData(date, weatherJson.hourly);
+  updateDisplay(weatherJson, currentLocation, filteredHourlyJson, date);
   storeWeatherJson(weatherJson);
 };
 
 const handleDayToggle = (event) => {
-  const weatherJson = JSON.parse(sessionStorage.getItem("myWeather"));
+  const weatherString = getWeatherJson();
+  if (typeof weatherString !== "string") return;
+  const weatherJson = JSON.parse(weatherString);
   const hourlyJson = weatherJson.hourly;
   const date = event.target.closest("button").dataset.day;
-  const data = getHourlyData(date, weatherJson.hourly);
-
-  updateHourlyDisplay(hourlyJson);
+  const filteredHourlyJson = filterHourlyData(date, weatherJson.hourly);
+  storeSessionDate(date);
+  switchDayBtnDisplay(date);
+  renderHourlyWeather(filteredHourlyJson);
 };
 
 document.addEventListener("DOMContentLoaded", initApp);

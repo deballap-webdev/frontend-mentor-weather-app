@@ -199,11 +199,20 @@
   .sticky {
     position: sticky;
   }
+  .-top-999 {
+    top: calc(var(--spacing) * -999);
+  }
+  .-top-9999 {
+    top: calc(var(--spacing) * -9999);
+  }
   .top-0 {
     top: 0px;
   }
-  .top-9999 {
-    top: calc(var(--spacing) * 9999);
+  .top-250 {
+    top: calc(var(--spacing) * 250);
+  }
+  .top-1000 {
+    top: calc(var(--spacing) * 1000);
   }
   .-left-10000 {
     left: calc(var(--spacing) * -10000);
@@ -259,9 +268,6 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
-  .h-10 {
-    height: calc(var(--spacing) * 10);
-  }
   .h-71 {
     height: calc(var(--spacing) * 71);
   }
@@ -301,9 +307,6 @@
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
-  .w-10 {
-    width: calc(var(--spacing) * 10);
-  }
   .w-25 {
     width: calc(var(--spacing) * 25);
   }
@@ -312,21 +315,6 @@
   }
   .w-37 {
     width: calc(var(--spacing) * 37);
-  }
-  .w-40 {
-    width: calc(var(--spacing) * 40);
-  }
-  .w-60 {
-    width: calc(var(--spacing) * 60);
-  }
-  .w-80 {
-    width: calc(var(--spacing) * 80);
-  }
-  .w-100 {
-    width: calc(var(--spacing) * 100);
-  }
-  .w-200 {
-    width: calc(var(--spacing) * 200);
   }
   .w-\[calc\(100\%-45px\)\] {
     width: calc(100% - 45px);
@@ -345,15 +333,6 @@
   }
   .w-full {
     width: 100%;
-  }
-  .max-w-50 {
-    max-width: calc(var(--spacing) * 50);
-  }
-  .max-w-81 {
-    max-width: calc(var(--spacing) * 81);
-  }
-  .max-w-82 {
-    max-width: calc(var(--spacing) * 82);
   }
   .max-w-83 {
     max-width: calc(var(--spacing) * 83);
@@ -499,14 +478,6 @@
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
-  .text-4xl {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
-  }
-  .text-5xl {
-    font-size: var(--text-5xl);
-    line-height: var(--tw-leading, var(--text-5xl--line-height));
-  }
   .text-6xl {
     font-size: var(--text-6xl);
     line-height: var(--tw-leading, var(--text-6xl--line-height));
@@ -614,17 +585,8 @@
     .lg\:w-175 {
       width: calc(var(--spacing) * 175);
     }
-    .lg\:max-w-126 {
-      max-width: calc(var(--spacing) * 126);
-    }
-    .lg\:max-w-129 {
-      max-width: calc(var(--spacing) * 129);
-    }
     .lg\:max-w-130 {
       max-width: calc(var(--spacing) * 130);
-    }
-    .lg\:max-w-140 {
-      max-width: calc(var(--spacing) * 140);
     }
     .lg\:text-5xl {
       font-size: var(--text-5xl);
