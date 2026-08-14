@@ -1,3 +1,5 @@
+import { filterHourlyData } from "./dataFunctions.js";
+
 export const buildIcon = (iconName, extension, width, height) => {
   const img = document.createElement("img");
   img.alt = iconName + " icon";

@@ -29,52 +29,63 @@ const hideDropDown = (elem) => {
   elem.ariaExpanded = "false";
 };
 
-export const updateDisplay = (weatherJson, locationObj, hourlyJson, date) => {
-  renderCurrentWeather(weatherJson, locationObj);
-  renderCurrentDetails(weatherJson.current, locationObj);
-  renderDailyWeather(weatherJson);
-  renderHourlyWeather(hourlyJson);
+export const updateDisplay = (
+  weatherJson,
+  locationObj,
+  hourlyJson,
+  convertedUnitsObj,
+) => {
+  renderCurrentWeather(weatherJson, locationObj, convertedUnitsObj.current);
+  renderCurrentDetails(
+    weatherJson.current,
+    locationObj,
+    convertedUnitsObj.current,
+  );
+  renderDailyWeather(weatherJson, convertedUnitsObj.daily);
+  renderHourlyWeather(hourlyJson, convertedUnitsObj.hourly);
   updateDescriptonText(weatherJson.current.weather_code);
   setFocusOnSearch();
 };
 
-const renderDailyWeather = (weatherJson) => {
+const renderDailyWeather = (weatherJson, dailyUnits) => {
   const dailyWeather = document.getElementById("dailyWeather");
   clearElem(dailyWeather);
-  const dailyWeatherArray = createDailyDivs(weatherJson.daily);
+  const dailyWeatherArray = createDailyDivs(weatherJson.daily, dailyUnits);
   dailyWeatherArray.forEach((div) => {
     dailyWeather.append(div);
   });
 };
 
-const renderCurrentWeather = (weatherJson, locationObj) => {
+const renderCurrentWeather = (weatherJson, locationObj, currentUnits) => {
   const currentWeather = document.getElementById("currentWeather");
   clearElem(currentWeather);
   const currentWeatherArray = createCurrentWeatherDivs(
     locationObj,
     weatherJson,
+    currentUnits,
   );
   currentWeatherArray.forEach((div) => {
     currentWeather.append(div);
   });
 };
 
-const renderCurrentDetails = (currentJson, locationObj) => {
+const renderCurrentDetails = (currentJson, locationObj, currentUnits) => {
   const currentDetails = document.getElementById("currentWeather__details");
   clearElem(currentDetails);
   const currentDetailsArray = createCurrentDetailsDivs(
     locationObj,
     currentJson,
+    currentUnits,
   );
   currentDetailsArray.forEach((div) => {
     currentDetails.append(div);
   });
 };
 
-export const renderHourlyWeather = (hourlyJson) => {
+export const renderHourlyWeather = (hourlyJson, hourlyUnits) => {
   const hourlyWeather = document.getElementById("hourlyWeather");
   clearElem(hourlyWeather);
-  const hourlyWeatherArray = createHourlyDivs(hourlyJson);
+  const hourlyWeatherArray = createHourlyDivs(hourlyJson, hourlyUnits);
   hourlyWeatherArray.forEach((div) => {
     hourlyWeather.append(div);
   });

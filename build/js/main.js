@@ -9,6 +9,7 @@ import {
   storeSessionDate,
   getSessionDate,
   getWeatherJson,
+  convertBtwUnits,
 } from "./dataFunctions.js";
 import {
   dropDownDisplay,
@@ -114,8 +115,10 @@ const updateUnitAndDisplay = (event) => {
   const unitObj = getUnits(event);
   if (!unitObj) return;
   currentLocation.setLocation(getUnits(event));
-  //convertBtwUnits(currentLocation);
   switchUnitBtnDisplay(currentLocation);
+  const weatherString = getWeatherJson();
+  if (typeof weatherString !== "string") return;
+  const weatherJson = JSON.parse(weatherString);
   const dateString = getSessionDate();
   const date =
     typeof dateString === "string"
@@ -123,16 +126,30 @@ const updateUnitAndDisplay = (event) => {
       : `${new Date().toLocaleDateString("en-US", {
           weekday: "long",
         })}`;
+  const filteredHourlyData = filterHourlyData(date, weatherJson.hourly);
+  const convertedValues = convertBtwUnits(currentLocation, date);
+  updateDisplay(
+    weatherJson,
+    currentLocation,
+    filteredHourlyData,
+    convertedValues,
+  );
 };
 
 const updateDataAndDisplay = async () => {
   const weatherJson = await getWeatherFromApi(currentLocation);
+  storeWeatherJson(weatherJson);
   const date = `${new Date().toLocaleDateString("en-US", {
     weekday: "long",
   })}`;
+  const convertedValues = convertBtwUnits(currentLocation, date);
   const filteredHourlyJson = filterHourlyData(date, weatherJson.hourly);
-  updateDisplay(weatherJson, currentLocation, filteredHourlyJson);
-  storeWeatherJson(weatherJson);
+  updateDisplay(
+    weatherJson,
+    currentLocation,
+    filteredHourlyJson,
+    convertedValues,
+  );
 };
 
 const handleDayToggle = (event) => {

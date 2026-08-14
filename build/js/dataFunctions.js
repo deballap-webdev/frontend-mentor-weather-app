@@ -135,6 +135,143 @@ export const getSessionDate = () => {
   return sessionStorage.getItem("myDate");
 };
 
+export const convertBtwUnits = (locationObj, day) => {
+  const weatherString = getWeatherJson();
+  if (typeof weatherString !== "string") return;
+  const weatherJson = JSON.parse(weatherString);
+  const apiUnits = weatherJson.current_units;
+  const apiUnitObj = getApiUnits(apiUnits);
+  const currentUnitObj = getCurrentUnits(locationObj);
+  const filteredHourlyTemp = filterHourlyData(day, weatherJson.hourly).temp;
+  console.log(
+    convertWind(
+      `${weatherJson.current.wind_speed_10m}`,
+      apiUnitObj.wind,
+      currentUnitObj.wind,
+    ),
+  );
+  console.log(filteredHourlyTemp);
+  const convertedUnitsObj = {
+    current: {
+      wind: convertWind(
+        `${weatherJson.current.wind_speed_10m}`,
+        apiUnitObj.wind,
+        currentUnitObj.wind,
+      ),
+      precipt: convertPrecipt(
+        `${weatherJson.current.precipitation}`,
+        apiUnitObj.precipt,
+        currentUnitObj.precipt,
+      ),
+      temp: convertTemp(
+        `${weatherJson.current.temperature_2m}`,
+        apiUnitObj.temp,
+        currentUnitObj.temp,
+      ),
+      apparentTemp: convertTemp(
+        `${weatherJson.current.apparent_temperature}`,
+        apiUnitObj.temp,
+        currentUnitObj.temp,
+      ),
+    },
+
+    daily: {
+      minTemp: weatherJson.daily.temperature_2m_min.map((temp) => {
+        return convertTemp(temp, apiUnitObj.temp, currentUnitObj.temp);
+      }),
+      maxTemp: weatherJson.daily.temperature_2m_max.map((temp) => {
+        return convertTemp(temp, apiUnitObj.temp, currentUnitObj.temp);
+      }),
+    },
+
+    hourly: {
+      temp: filteredHourlyTemp.map((temp) => {
+        return convertTemp(temp, apiUnitObj.temp, currentUnitObj.temp);
+      }),
+    },
+  };
+  console.log(convertedUnitsObj);
+  return convertedUnitsObj;
+};
+
+const getApiUnits = (apiUnits) => {
+  return {
+    wind: apiUnits.wind_speed_10m === "mp/h" ? "mph" : "kmh",
+    precipt: apiUnits.precipitation === "mm" ? "mm" : "inch",
+    temp: apiUnits.temperature_2m === "°C" ? "celsius" : "fahrenheit",
+  };
+};
+
+const getCurrentUnits = (locationObj) => {
+  return {
+    wind: locationObj.getWind(),
+    precipt: locationObj.getPrecipt(),
+    temp: locationObj.getTemp(),
+  };
+};
+
+const convertTemp = (temp, apiUnit, currentUnit) => {
+  const signature = `${apiUnit}-${currentUnit}`;
+
+  const conversionLookup = {
+    "celsius-fahrenheit": () => {
+      return (temp * 9) / 5 + 32;
+    },
+    "fahrenheit-celsius": () => {
+      return (temp - 32) * (5 / 9);
+    },
+    default: () => {
+      return temp;
+    },
+  };
+  const action = conversionLookup[signature]
+    ? conversionLookup[signature]
+    : conversionLookup["default"];
+  const convertedTemp = action(temp);
+  return convertedTemp;
+};
+
+const convertPrecipt = (precipt, apiUnit, currentUnit) => {
+  const signature = `${apiUnit}-${currentUnit}`;
+  const conversionLookup = {
+    "mm-inch": () => {
+      return precipt / 25.4;
+    },
+    "inch-mm": () => {
+      return 25.4 * precipt;
+    },
+    default: () => {
+      return precipt;
+    },
+  };
+  const action = conversionLookup[signature]
+    ? conversionLookup[signature]
+    : conversionLookup["default"];
+  const convertedPrecipt = action(precipt);
+  return convertedPrecipt;
+};
+
+const convertWind = (wind, apiUnit, currentUnit) => {
+  const signature = `${apiUnit}-${currentUnit}`;
+
+  const conversionLookup = {
+    "kmh-mph": () => {
+      return wind * 1.60934;
+    },
+    "inch-mm": () => {
+      return wind / 1.60934;
+    },
+    default: () => {
+      return wind;
+    },
+  };
+  const action = conversionLookup[signature]
+    ? conversionLookup[signature]
+    : conversionLookup["default"];
+  const convertedWind = action(wind);
+  return convertedWind;
+};
+
 export const getWeatherDetails = (weatherCode) => {
   const weatherCodeLookup = {
     0: { desc: "Clear Sky", iconName: "sunny" },
