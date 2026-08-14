@@ -65,13 +65,16 @@ const getGeolocation = async () => {
 };
 
 const geoSuccess = async (positionObj) => {
+  const nameJson = await getNameFromApi(
+    positionObj.coords.latitude,
+    positionObj.coords.longitude,
+  );
+  if (handleError(nameJson)) return;
+  const locationName = nameJson.display_name;
   const coordsObj = {
     lat: positionObj.coords.latitude,
     lon: positionObj.coords.longitude,
-    name: await getNameFromApi(
-      positionObj.coords.latitude,
-      positionObj.coords.longitude,
-    ),
+    name: locationName,
   };
   currentLocation.setLocation(coordsObj);
   updateDataAndDisplay();
@@ -98,16 +101,22 @@ const submitLocation = async (event) => {
   updateDataAndDisplay();
 };
 
-const handleError = (apiData) => {
+const handleError = (apiData, apiType) => {
   if (!apiData) {
-    apiErrorDisplay("Connection Error");
-    if (apiData.error) {
-      apiErrorDisplay(apiData.reason);
-    } else if (!apiData.results) {
-      apiErrorDisplay("No match found");
-    }
+    apiErrorDisplay("No Internet Connection");
     return true;
+  } else {
+    if (apiData.error) {
+      apiData.reason
+        ? apiErrorDisplay(apiData.reason)
+        : apiErrorDisplay(apiData.error);
+      return true;
+    } else if (apiType === "forecastApi" && !apiData.results) {
+      apiErrorDisplay("No Match Found");
+      return true;
+    }
   }
+
   return false;
 };
 
@@ -138,6 +147,7 @@ const updateUnitAndDisplay = (event) => {
 
 const updateDataAndDisplay = async () => {
   const weatherJson = await getWeatherFromApi(currentLocation);
+  if (handleError(weatherJson, "forecastApi")) return;
   storeWeatherJson(weatherJson);
   const date = `${new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -162,7 +172,8 @@ const handleDayToggle = (event) => {
   const filteredHourlyJson = filterHourlyData(date, weatherJson.hourly);
   storeSessionDate(date);
   switchDayBtnDisplay(date);
-  renderHourlyWeather(filteredHourlyJson);
+  const convertedValues = convertBtwUnits(currentLocation, date);
+  renderHourlyWeather(filteredHourlyJson, convertedValues.hourly);
 };
 
 document.addEventListener("DOMContentLoaded", initApp);

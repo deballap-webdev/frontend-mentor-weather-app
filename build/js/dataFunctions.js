@@ -22,7 +22,7 @@ export const getNameFromApi = async (lat, lon) => {
       `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=5`,
     );
     const nameJson = await nameStream.json();
-    return nameJson.display_name;
+    return nameJson;
   } catch (err) {
     console.error(err.stack);
   }
@@ -143,14 +143,6 @@ export const convertBtwUnits = (locationObj, day) => {
   const apiUnitObj = getApiUnits(apiUnits);
   const currentUnitObj = getCurrentUnits(locationObj);
   const filteredHourlyTemp = filterHourlyData(day, weatherJson.hourly).temp;
-  console.log(
-    convertWind(
-      `${weatherJson.current.wind_speed_10m}`,
-      apiUnitObj.wind,
-      currentUnitObj.wind,
-    ),
-  );
-  console.log(filteredHourlyTemp);
   const convertedUnitsObj = {
     current: {
       wind: convertWind(
@@ -190,7 +182,6 @@ export const convertBtwUnits = (locationObj, day) => {
       }),
     },
   };
-  console.log(convertedUnitsObj);
   return convertedUnitsObj;
 };
 

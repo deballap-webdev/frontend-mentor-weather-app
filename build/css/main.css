@@ -220,9 +220,6 @@
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
-  .mt-20 {
-    margin-top: calc(var(--spacing) * 20);
-  }
   .mr-1 {
     margin-right: var(--spacing);
   }
@@ -241,11 +238,17 @@
   .hidden {
     display: none;
   }
+  .table {
+    display: table;
+  }
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
   .h-4 {
     height: calc(var(--spacing) * 4);
+  }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
   }
   .h-5\.25 {
     height: calc(var(--spacing) * 5.25);
@@ -253,11 +256,20 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
+  .h-71 {
+    height: calc(var(--spacing) * 71);
+  }
   .h-71\.5 {
     height: calc(var(--spacing) * 71.5);
   }
+  .h-162 {
+    height: calc(var(--spacing) * 162);
+  }
   .h-162\.75 {
     height: calc(var(--spacing) * 162.75);
+  }
+  .h-\[calc\(100vh-48px\)\] {
+    height: calc(100vh - 48px);
   }
   .h-fit {
     height: fit-content;
@@ -268,11 +280,17 @@
   .min-h-screen {
     min-height: 100vh;
   }
+  .w-3 {
+    width: calc(var(--spacing) * 3);
+  }
   .w-3\.25 {
     width: calc(var(--spacing) * 3.25);
   }
   .w-4 {
     width: calc(var(--spacing) * 4);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
   }
   .w-5\.25 {
     width: calc(var(--spacing) * 5.25);
@@ -319,11 +337,23 @@
   .min-w-12 {
     min-width: calc(var(--spacing) * 12);
   }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
   .shrink {
     flex-shrink: 1;
   }
+  .flex-grow {
+    flex-grow: 1;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
   .rotate-180 {
     rotate: 180deg;
+  }
+  .resize {
+    resize: both;
   }
   .scrollbar-none {
     scrollbar-width: none;
@@ -354,6 +384,21 @@
   }
   .justify-evenly {
     justify-content: space-evenly;
+  }
+  .gap-1 {
+    gap: var(--spacing);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-2\.5 {
+    gap: calc(var(--spacing) * 2.5);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
@@ -419,6 +464,9 @@
   .py-3 {
     padding-block: calc(var(--spacing) * 3);
   }
+  .pt-20 {
+    padding-top: calc(var(--spacing) * 20);
+  }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
   }
@@ -463,6 +511,13 @@
   }
   .italic {
     font-style: italic;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -557,6 +612,11 @@
       width: min(100%, 800px);
     }
   }
+  @media screen and (width > 400px) {
+    .\34 00\:block {
+      display: block;
+    }
+  }
   .\[\&\:\:-webkit-scrollbar\]\:hidden::-webkit-scrollbar {
     display: none;
   }
@@ -626,7 +686,7 @@
 .units-drop-down {
   position: absolute;
   top: calc(var(--spacing) * 15);
-  z-index: 10;
+  z-index: 20;
   width: calc(var(--spacing) * 60);
   flex-direction: column;
   gap: var(--spacing);
@@ -678,7 +738,7 @@
 .days-drop-down {
   position: absolute;
   top: calc(var(--spacing) * 13);
-  z-index: 10;
+  z-index: 20;
   width: calc(var(--spacing) * 60);
   flex-direction: column;
   gap: var(--spacing);
@@ -721,6 +781,11 @@
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
 @property --tw-blur {
   syntax: "*";
@@ -774,11 +839,6 @@
 @property --tw-drop-shadow-size {
   syntax: "*";
   inherits: false;
-}
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
 }
 @property --tw-shadow {
   syntax: "*";
@@ -850,6 +910,7 @@
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
       --tw-font-weight: initial;
+      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
@@ -863,7 +924,6 @@
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
-      --tw-outline-style: solid;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
