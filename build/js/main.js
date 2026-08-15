@@ -29,6 +29,7 @@ import Location from "./Location.js";
 const currentLocation = new Location();
 const initApp = () => {
   //Add Listeners
+  const retryBtn = document.getElementById("retry");
   const daysContainer = document.getElementById("daysContainer");
   const unitBtn = document.getElementById("toggleUnit");
   const unitContainer = document.getElementById("unitContainer");
@@ -47,6 +48,7 @@ const initApp = () => {
   searchForm.addEventListener("submit", submitLocation);
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
   daysDropDown.addEventListener("click", handleDayToggle);
+  retryBtn.addEventListener("click", retrySearch);
   loadThePage();
 };
 
@@ -80,6 +82,7 @@ const geoSuccess = async (positionObj) => {
     name: locationName,
   };
   currentLocation.setLocation(coordsObj);
+  sessionStorage.setItem("lastSearch", coordsObj);
   updateDataAndDisplay();
 };
 
@@ -99,20 +102,27 @@ const submitLocation = async (event) => {
     .querySelector("#searchInput")
     .value.trim();
   if (!searchText) return;
+  sessionStorage.setItem("lastSearch", searchText);
+  search(searchText);
+};
+
+const search = async (searchText) => {
   const searching = document.getElementById("searching");
+
   show(searching);
+
   const coordsJson = await getCoordsFromApi(searchText);
   if (handleError(coordsJson, "coordsApi")) {
     hide(searching);
     return;
   }
-
   const coordsObj = {
     lat: coordsJson.results[0].latitude,
     lon: coordsJson.results[0].longitude,
     name: generateName(coordsJson.results[0]),
   };
   currentLocation.setLocation(coordsObj);
+  sessionStorage.setItem("lastSearch", coordsObj);
   updateDataAndDisplay();
 };
 
@@ -142,6 +152,21 @@ const handleError = (apiData, apiType) => {
     }
   }
   return false;
+};
+
+const retrySearch = () => {
+  const lastSearch = sessionStorage.getItem("lastSearch");
+  const errorDisplay = document.getElementById("errorDisplay");
+  const mainApp = document.getElementById("mainApp");
+  if (lastSearch) {
+    if (typeof lastSearch === "object") {
+      updateDataAndDisplay();
+    } else if (typeof lastSearch === "string") {
+      search(lastSearch);
+    }
+  }
+  hide(errorDisplay);
+  show(mainApp);
 };
 
 const updateUnitAndDisplay = (event) => {

@@ -68,7 +68,7 @@
       <h1 class="absolute -left-10000">
         Front End Mentor's Intermediate Weather App Challenge
       </h1>
-      <section id="mainApp" class="w-full">
+      <section id="mainApp" class="w-full flex flex-col">
         <p class="text-6xl my-12 text-center font-HEADER-FONT" id="headerDesc">
           How's the Sky Looking today?
         </p>
@@ -410,6 +410,9 @@
         </p>
         <button
           class="bg-LIGHT-BGCOLOR px-4 py-2 w-25 justify-between flex hover:cursor-pointer rounded-lg"
+          title="Retry search"
+          aria-label="Click to retry search"
+          id="retry"
         >
           <img
             src="images/icon-retry.svg"
