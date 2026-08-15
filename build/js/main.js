@@ -98,6 +98,7 @@ const geoError = (errObj) => {
 
 const submitLocation = async (event) => {
   event.preventDefault();
+  document.getElementById("searchInput").setAttribute("disabled", "");
   const searchText = event.currentTarget
     .querySelector("#searchInput")
     .value.trim();
@@ -108,12 +109,11 @@ const submitLocation = async (event) => {
 
 const search = async (searchText) => {
   const searching = document.getElementById("searching");
-
   show(searching);
-
   const coordsJson = await getCoordsFromApi(searchText);
   if (handleError(coordsJson, "coordsApi")) {
     hide(searching);
+    document.getElementById("searchInput").removeAttribute("disabled");
     return;
   }
   const coordsObj = {
@@ -200,6 +200,7 @@ const updateDataAndDisplay = async () => {
   console.log(weatherJson);
   if (handleError(weatherJson)) {
     hide(searching);
+    document.getElementById("searchInput").removeAttribute("disabled");
     return;
   }
   storeWeatherJson(weatherJson);
@@ -215,6 +216,7 @@ const updateDataAndDisplay = async () => {
     convertedValues,
   );
   hide(searching);
+  document.getElementById("searchInput").removeAttribute("disabled");
 };
 
 const handleDayToggle = (event) => {
