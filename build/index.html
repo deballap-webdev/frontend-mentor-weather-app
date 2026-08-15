@@ -26,10 +26,11 @@
       />
       <div class="flex items-end flex-col relative" id="unitContainer">
         <button
-          class="flex bg-CONTAINER-BGCOLOR border border-BORDER-COLOR px-4 py-2 gap-2 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white min-w-12 min-h-12"
+          class="flex bg-CONTAINER-BGCOLOR border border-BORDER-COLOR px-4 py-2 gap-2 justify-evenly items-center hover:cursor-pointer rounded-lg focus:outline-1 focus:outline-white min-w-12 min-h-12 disabled"
           id="toggleUnit"
           aria-label="toogle between imperial and metric units"
           title="Units Toogle"
+          disabled
         >
           <img src="images/icon-units.svg" alt="" class="w-4 h-4" />
           <span class="hidden 400:block">Units</span>
@@ -92,7 +93,7 @@
             <input
               type="search"
               placeholder="Search for a place..."
-              class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
+              class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer disabled"
               id="searchInput"
               autocomplete="off"
               disabled
@@ -100,10 +101,11 @@
           </div>
 
           <button
-            class="bg-SEARCH-BTN-COLOR py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1"
+            class="bg-SEARCH-BTN-COLOR py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1 disabled"
             aria-label="submit location search"
             title="Search Button"
             type="submit"
+            disabled
           >
             Search
           </button>
@@ -286,10 +288,11 @@
                   id="daysContainer"
                 >
                   <button
-                    class="flex bg-LIGHT-BORDER-COLOR py-2 px-4 rounded-lg w-fit gap-4 hover:cursor-pointer focus:outline-1 focus:outline-white"
+                    class="flex bg-LIGHT-BORDER-COLOR py-2 px-4 rounded-lg w-fit gap-4 hover:cursor-pointer focus:outline-1 focus:outline-white disabled"
                     title="Days Drop Down"
                     aria-label="Select a day from monday to sunday to view the hourly forecast for that day"
                     id="chooseDay"
+                    disabled
                   >
                     <span id="day">-</span
                     ><img

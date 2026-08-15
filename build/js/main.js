@@ -93,12 +93,17 @@ const geoError = (errObj) => {
   noMatch.textContent = errMsg;
   hide(forecastSection);
   show(noMatch);
+  document.querySelectorAll(".disabled").forEach((item) => {
+    item.removeAttribute("disabled");
+  });
   return;
 };
 
 const submitLocation = async (event) => {
   event.preventDefault();
-  document.getElementById("searchInput").setAttribute("disabled", "");
+  document.querySelectorAll(".disabled").forEach((item) => {
+    item.setAttribute("disabled", "");
+  });
   const searchText = event.currentTarget
     .querySelector("#searchInput")
     .value.trim();
@@ -113,7 +118,9 @@ const search = async (searchText) => {
   const coordsJson = await getCoordsFromApi(searchText);
   if (handleError(coordsJson, "coordsApi")) {
     hide(searching);
-    document.getElementById("searchInput").removeAttribute("disabled");
+    document.querySelectorAll(".disabled").forEach((item) => {
+      item.removeAttribute("disabled");
+    });
     return;
   }
   const coordsObj = {
@@ -144,7 +151,6 @@ const handleError = (apiData, apiType) => {
       noMatch.textContent = "No search result found!";
       hide(forecastSection);
       show(noMatch);
-      console.log(apiType);
       return true;
     } else {
       show(forecastSection);
@@ -197,10 +203,11 @@ const updateUnitAndDisplay = (event) => {
 const updateDataAndDisplay = async () => {
   const searching = document.getElementById("searching");
   const weatherJson = await getWeatherFromApi(currentLocation);
-  console.log(weatherJson);
   if (handleError(weatherJson)) {
     hide(searching);
-    document.getElementById("searchInput").removeAttribute("disabled");
+    document.querySelectorAll(".disabled").forEach((item) => {
+      item.removeAttribute("disabled");
+    });
     return;
   }
   storeWeatherJson(weatherJson);
@@ -216,7 +223,9 @@ const updateDataAndDisplay = async () => {
     convertedValues,
   );
   hide(searching);
-  document.getElementById("searchInput").removeAttribute("disabled");
+  document.querySelectorAll(".disabled").forEach((item) => {
+    item.removeAttribute("disabled");
+  });
 };
 
 const handleDayToggle = (event) => {
