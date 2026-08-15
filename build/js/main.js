@@ -39,7 +39,7 @@ const initApp = () => {
   const searchForm = document.getElementById("searchForm");
   const unitsDropDown = document.getElementById("unitsDropDown");
   const daysDropDown = document.getElementById("daysDropDown");
-  const searchInput = searchForm.querySelector("#searchInput");
+  const searchInput = document.getElementById("searchInput");
   searchInput.addEventListener("input", handleSearchSuggestion);
   unitBtn.addEventListener("click", dropDownDisplay);
   unitContainer.addEventListener("focusout", (event) => {
@@ -49,7 +49,7 @@ const initApp = () => {
   daysContainer.addEventListener("focusout", (event) => {
     dropDownDisplay(event, dayButton);
   });
-  // suggestionBox.addEventListener("click");
+  suggestionBox.addEventListener("click", searchTheSuggestion);
   searchForm.addEventListener("submit", submitLocation);
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
   daysDropDown.addEventListener("click", handleDayToggle);
@@ -79,6 +79,15 @@ const handleSearchSuggestion = async (event) => {
     return generateName(result);
   });
   buildSuggestions(suggestedLocations);
+};
+
+const searchTheSuggestion = (event) => {
+  const suggestionBtn = event.target.closest("button");
+  if (suggestionBtn && suggestionBtn.classList.contains("searchSuggestion")) {
+    const searchInput = document.getElementById("searchInput");
+    searchInput.value = suggestionBtn.textContent;
+    search(suggestionBtn.textContent);
+  }
 };
 
 const getGeolocation = async () => {
