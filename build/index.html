@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="images/favicon-32x32.png" />
-    <script src="js/main.js" type="module"></script>
+    <!--<script src="js/main.js" type="module"></script>-->
     <title>front-end mentor's weather app challenge</title>
   </head>
   <body
@@ -68,48 +68,48 @@
       <h1 class="absolute -left-10000">
         Front End Mentor's Intermediate Weather App Challenge
       </h1>
-      <section id="mainApp">
+      <section id="mainApp" class="w-full">
         <p class="text-6xl my-12 text-center font-HEADER-FONT" id="headerDesc">
           How's the Sky Looking today?
         </p>
-        <section class="w-full">
-          <form
-            role="search"
-            class="flex flex-wrap flex-row mx-auto gap-4 w-[min(100%,600px)] lg:w-175"
-            id="searchForm"
-          >
-            <div
-              class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR rounded-lg flex items-center 570:grow px-4 w-[min(100%,400px)] lg:w-135 min-h-48px focus-within:outline-white focus-within:outline-1"
-              tabindex="1"
-            >
-              <img
-                src="images/icon-search.svg"
-                class="w-5.25 h-5.25 mr-2"
-                alt="search icon"
-              />
-              <label for="searchInput" class="absolute -left-10000"
-                >Search Weather Conditions For Any Location</label
-              >
-              <input
-                type="search"
-                placeholder="Search for a place..."
-                class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
-                id="searchInput"
-                autocomplete="off"
-              />
-            </div>
 
-            <button
-              class="bg-SEARCH-BTN-COLOR py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1"
-              aria-label="submit location search"
-              title="Search Button"
-              type="submit"
+        <form
+          role="search"
+          class="flex flex-wrap flex-row mx-auto gap-4 w-[min(100%,600px)] lg:w-175"
+          id="searchForm"
+        >
+          <div
+            class="bg-CONTAINER-BGCOLOR border border-BORDER-COLOR rounded-lg flex items-center 570:grow px-4 w-[min(100%,400px)] lg:w-135 min-h-48px focus-within:outline-white focus-within:outline-1"
+            tabindex="1"
+          >
+            <img
+              src="images/icon-search.svg"
+              class="w-5.25 h-5.25 mr-2"
+              alt="search icon"
+            />
+            <label for="searchInput" class="absolute -left-10000"
+              >Search Weather Conditions For Any Location</label
             >
-              Search
-            </button>
-          </form>
-        </section>
-        <section id="forecastSection">
+            <input
+              type="search"
+              placeholder="Search for a place..."
+              class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
+              id="searchInput"
+              autocomplete="off"
+            />
+          </div>
+
+          <button
+            class="bg-SEARCH-BTN-COLOR py-2 px-4 570:grow hover:cursor-pointer rounded-lg w-30 min-w-12 min-h-12 focus:outline-white focus:outline-1"
+            aria-label="submit location search"
+            title="Search Button"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+
+        <section id="forecastSection" class="w-full">
           <a
             href="#dailyHeader"
             class="absolute -top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
@@ -117,17 +117,29 @@
           >
 
           <div
-            class="flex flex-wrap w-[min(100%,1250px)] gap-6 mx-auto justify-center items-center mt-6"
+            class="flex flex-row flex-wrap w-[min(100%,1250px)] gap-6 mx-auto justify-center items-center mt-6"
           >
-            <div class="w-[min(100%,800px)]" id="me">
+            <div class="w-[min(100%,800px)]">
               <section aria-labelledby="currentHeader" class="mb-6">
                 <h2 id="currentHeader" class="absolute -left-10000">
                   Current Weather Conditions
                 </h2>
                 <section
-                  class="bg-[url(../images/bg-today-small.svg)] p-4 h-71.5 mb-4 bg-center bg-cover bg-no-repeat flex flex-wrap justify-between items-center md:bg-[url(../images/bg-today-large.svg)] rounded-3xl md:max-w-200"
+                  class="bg-LIGHT-BGCOLOR p-4 h-71.5 mb-4 flex flex-col justify-center items-center rounded-3xl md:max-w-200"
                   id="currentWeather"
                 >
+                  <div class="relative mb-4">
+                    <div
+                      class="w-5 absolute animate-pulse -top-6 right-6 bg-white h-5 rounded-[50%]"
+                    ></div>
+                    <div
+                      class="w-5 absolute animate-pulse [animation-delay:0.5s] -top-8 bg-white h-5 rounded-[50%]"
+                    ></div>
+                    <div
+                      class="w-5 absolute animate-pulse [animation-delay:1s] -top-6 left-10 bg-white h-5 rounded-[50%]"
+                    ></div>
+                  </div>
+                  <div class="text-2xl">Loading...</div>
                   <!-- <div class="text-center mx-auto md:text-left md:mx-0">
                 <div class="font-bold text-3xl mb-4">Berlin, Germany</div>
                 <div>Tuesday, Aug 5, 2025</div>
@@ -150,22 +162,22 @@
                   id="currentWeather__details"
                   class="flex flex-wrap gap-4 justify-center items-center"
                 >
-                  <!-- <div class="current-card">
-                <div>Feels Like</div>
-                <div class="text-2xl">64°</div>
-              </div>
-              <div class="current-card">
-                <div>Humidity</div>
-                <div class="text-2xl">46%</div>
-              </div>
-              <div class="current-card">
-                <div>Wind</div>
-                <div class="text-2xl">9 mph</div>
-              </div>
-              <div class="current-card">
-                <div>Percipitation</div>
-                <div class="text-2xl">0 in</div>
-              </div> -->
+                  <div class="current-card">
+                    <div>Feels Like</div>
+                    <div class="text-2xl">_</div>
+                  </div>
+                  <div class="current-card">
+                    <div>Humidity</div>
+                    <div class="text-2xl">_</div>
+                  </div>
+                  <div class="current-card">
+                    <div>Wind</div>
+                    <div class="text-2xl">_</div>
+                  </div>
+                  <div class="current-card">
+                    <div>Percipitation</div>
+                    <div class="text-2xl">_</div>
+                  </div>
                 </section>
               </section>
               <a
@@ -176,6 +188,13 @@
               <section aria-labelledby="dailyHeader" class="max-w-200">
                 <h2 class="mb-4" id="dailyHeader">Daily Forecast</h2>
                 <div class="flex flex-wrap gap-4" id="dailyWeather">
+                  <div class="daily-card h-40"></div>
+                  <div class="daily-card h-40"></div>
+                  <div class="daily-card h-40"></div>
+                  <div class="daily-card h-40"></div>
+                  <div class="daily-card h-40"></div>
+                  <div class="daily-card h-40"></div>
+                  <div class="daily-card h-40"></div>
                   <!-- <div class="daily-card">
                 <div>Tue</div>
                 <img src="images/icon-drizzle.webp" alt="" />
@@ -254,12 +273,12 @@
                   id="daysContainer"
                 >
                   <button
-                    class="flex bg-LIGHT-BORDER-COLOR p-2 rounded-lg justify-evenly w-37 hover:cursor-pointer focus:outline-1 focus:outline-white"
+                    class="flex bg-LIGHT-BORDER-COLOR py-2 px-4 rounded-lg w-fit gap-4 hover:cursor-pointer focus:outline-1 focus:outline-white"
                     title="Days Drop Down"
                     aria-label="Select a day from monday to sunday to view the hourly forecast for that day"
                     id="chooseDay"
                   >
-                    <span id="day">Wednesday</span
+                    <span id="day">-</span
                     ><img
                       src="images/icon-dropdown.svg"
                       data-dropDown="true"
@@ -286,6 +305,15 @@
               </div>
 
               <div id="hourlyWeather" class="px-4 pb-4">
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
+                <div class="hourly-card h-11.5"></div>
                 <!-- <div class="hourly-card">
               <div class="icon-time">
                 <img src="images/icon-fog.webp" alt="" />
@@ -346,40 +374,41 @@
             </section>
           </div>
         </section>
-        <section
-          class="flex flex-col gap-4 items-center max-w-83 md:max-w-100 lg:max-w-130 pt-20 mx-auto h-[calc(100vh-48px)]"
-          id="errorDisplay"
+      </section>
+
+      <section
+        class="hidden flex-col gap-4 items-center max-w-83 md:max-w-100 lg:max-w-130 pt-20 mx-auto h-[calc(100vh-48px)]"
+        id="errorDisplay"
+      >
+        <img
+          src="images/icon-error.svg"
+          alt="Error Icon"
+          width="18"
+          height="18"
+          class="w-8 h-8"
+        />
+        <p
+          class="text-3xl md:text-4xl lg:text-5xl font-HEADER-FONT font-semibold text-center"
+        >
+          Something went wrong
+        </p>
+        <p class="text-center">
+          we couldn't connect to the server (<span id="apiError">API error</span
+          >), Please try again in a few moments
+        </p>
+        <button
+          class="bg-LIGHT-BGCOLOR px-4 py-2 w-25 justify-between flex hover:cursor-pointer rounded-lg"
         >
           <img
-            src="images/icon-error.svg"
-            alt="Error Icon"
-            width="18"
-            height="18"
-            class="w-8 h-8"
+            src="images/icon-retry.svg"
+            alt="Retry Icon"
+            width="16"
+            height="17"
           />
-          <p
-            class="text-3xl md:text-4xl lg:text-5xl font-HEADER-FONT font-semibold text-center"
-          >
-            Something went wrong
-          </p>
-          <p class="text-center">
-            we couldn't connect to the server (<span id="apiError"
-              >API error</span
-            >), Please try again in a few moments
-          </p>
-          <button
-            class="bg-LIGHT-BGCOLOR px-4 py-2 w-25 justify-between flex hover:cursor-pointer rounded-lg"
-          >
-            <img
-              src="images/icon-retry.svg"
-              alt="Retry Icon"
-              width="16"
-              height="17"
-            />
-            Retry
-          </button>
-        </section>
+          Retry
+        </button>
       </section>
+      <p class="text-2xl font-semibold mt-10 hidden">No search result found!</p>
       <p id="confirmation" class="-left-10000" aria-live="assertive"></p>
     </main>
   </body>

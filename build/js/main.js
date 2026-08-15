@@ -16,7 +16,11 @@ import {
   updateDisplay,
   renderHourlyWeather,
 } from "./domFunctions.js";
-import { apiErrorDisplay } from "./apiErrorFunctions.js";
+import {
+  apiErrorDisplay,
+  toggleViewForResearch,
+  noMatchFound,
+} from "./apiErrorFunctions.js";
 import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToogle.js";
 
 import Location from "./Location.js";
@@ -80,8 +84,8 @@ const geoSuccess = async (positionObj) => {
   updateDataAndDisplay();
 };
 
-const geoError = (errMsg) => {
-  return "error";
+const geoError = () => {
+  const errMsg = errObj ? errObj.message : "Geolocation not supported";
 };
 
 const submitLocation = async (event) => {
@@ -99,10 +103,11 @@ const submitLocation = async (event) => {
   };
   currentLocation.setLocation(coordsObj);
   updateDataAndDisplay();
+  toggleViewForResearch();
 };
 
 const handleError = (apiData, apiType) => {
-  if (!apiData) {
+  /* if (!apiData) {
     apiErrorDisplay("No Internet Connection");
     return true;
   } else {
@@ -112,12 +117,12 @@ const handleError = (apiData, apiType) => {
         : apiErrorDisplay(apiData.error);
       return true;
     } else if (apiType === "forecastApi" && !apiData.results) {
-      apiErrorDisplay("No Match Found");
+      noMatchFound()
       return true;
     }
   }
 
-  return false;
+  return false; */
 };
 
 const updateUnitAndDisplay = (event) => {

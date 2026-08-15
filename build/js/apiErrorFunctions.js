@@ -1,38 +1,31 @@
-import { buildIcon, clearElem, createElem } from "./Utilities.js";
+import { buildIcon, clearElem, createElem, show, hide } from "./Utilities.js";
 
 export const apiErrorDisplay = (text) => {
   const errorDisplay = document.getElementById("errorDisplay");
+  const mainApp = document.getElementById("mainApp");
   const apiError = document.getElementById("apiError");
-
-  errorDisplay.classList.remove("hidden");
-  errorDisplay.classList.add("flex");
-  /* clearElem(errorDisplay);
-  const errorDivArray = createErrorDivs(text);
-  errorDivArray.forEach((div) => errorDisplay.append(div)); */
+  apiError.textContent = text;
+  show(errorDisplay);
+  hide(mainApp);
 };
 
-/* const createErrorDivs = (text) => {
-  const errorIcon = buildIcon("error", "svg", "18", "18");
-  errorIcon.classList.add("w-8", "h-8");
-  const errorHeading = createElem(
-    [
-      "text-3xl",
-      "md:text-4xl",
-      "lg:text-5xl",
-      "font-HEADER-FONT",
-      "font-semibold",
-      "text-center",
-    ],
-    "Something went wrong",
-  );
+const retrySearch = () => {
+  const errorDisplay = document.getElementById("errorDisplay");
+  const mainApp = document.getElementById("mainApp");
+  hide(errorDisplay);
+  show(mainApp);
+};
 
-  const errorMsg = createElem(
-    ["text-center"],
-    `we couldn't connect to the server (${text}), Please try again in a few moments`,
-  );
+export const noMatchFound = () => {
+  const forecastSection = document.getElementById("forecastSection");
+  const noMatch = document.getElementById("noMatch");
+  hide(forecastSection);
+  show(noMatch);
+};
 
-  const retryBtn = document.createElement('button')
-  const retryBtnText = document.createTextNode = 'Retry'
-  const retryIcon = buildIcon('retry', 'svg', '16', '17');
-  return [errorIcon, errorHeading, errorMsg, retryBtn];
-}; */
+export const toggleViewForResearch = () => {
+  const forecastSection = document.getElementById("forecastSection");
+  const noMatch = document.getElementById("noMatch");
+  show(forecastSection);
+  hide(noMatch);
+};

@@ -8,6 +8,7 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-500: oklch(63.7% 0.237 25.331);
     --color-neutral-700: oklch(37.1% 0 none);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -27,6 +28,7 @@
     --font-weight-bold: 700;
     --radius-lg: 0.5rem;
     --radius-3xl: 1.5rem;
+    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-BGCOLOR: rgb(2, 1, 43);
@@ -199,14 +201,26 @@
   .sticky {
     position: sticky;
   }
+  .-top-6 {
+    top: calc(var(--spacing) * -6);
+  }
+  .-top-8 {
+    top: calc(var(--spacing) * -8);
+  }
   .-top-9999 {
     top: calc(var(--spacing) * -9999);
   }
   .top-0 {
     top: 0px;
   }
+  .right-6 {
+    right: calc(var(--spacing) * 6);
+  }
   .-left-10000 {
     left: calc(var(--spacing) * -10000);
+  }
+  .left-10 {
+    left: calc(var(--spacing) * 10);
   }
   .z-10 {
     z-index: 10;
@@ -219,6 +233,9 @@
   }
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
+  }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
   }
   .mr-1 {
     margin-right: var(--spacing);
@@ -255,6 +272,15 @@
   }
   .h-8 {
     height: calc(var(--spacing) * 8);
+  }
+  .h-11 {
+    height: calc(var(--spacing) * 11);
+  }
+  .h-11\.5 {
+    height: calc(var(--spacing) * 11.5);
+  }
+  .h-40 {
+    height: calc(var(--spacing) * 40);
   }
   .h-71 {
     height: calc(var(--spacing) * 71);
@@ -304,9 +330,6 @@
   .w-30 {
     width: calc(var(--spacing) * 30);
   }
-  .w-37 {
-    width: calc(var(--spacing) * 37);
-  }
   .w-\[calc\(100\%-45px\)\] {
     width: calc(100% - 45px);
   }
@@ -321,6 +344,9 @@
   }
   .w-\[min\(100\%\,1250px\)\] {
     width: min(100%, 1250px);
+  }
+  .w-fit {
+    width: fit-content;
   }
   .w-full {
     width: 100%;
@@ -351,6 +377,9 @@
   }
   .rotate-180 {
     rotate: 180deg;
+  }
+  .animate-pulse {
+    animation: var(--animate-pulse);
   }
   .resize {
     resize: both;
@@ -394,12 +423,6 @@
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
-  .gap-2\.5 {
-    gap: calc(var(--spacing) * 2.5);
-  }
-  .gap-3 {
-    gap: calc(var(--spacing) * 3);
-  }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
@@ -411,6 +434,9 @@
   }
   .rounded-3xl {
     border-radius: var(--radius-3xl);
+  }
+  .rounded-\[50\%\] {
+    border-radius: 50%;
   }
   .rounded-lg {
     border-radius: var(--radius-lg);
@@ -437,17 +463,11 @@
   .bg-SEARCH-BTN-COLOR {
     background-color: var(--color-SEARCH-BTN-COLOR);
   }
-  .bg-\[url\(\.\.\/images\/bg-today-small\.svg\)\] {
-    background-image: url(../images/bg-today-small.svg);
+  .bg-red-500 {
+    background-color: var(--color-red-500);
   }
-  .bg-cover {
-    background-size: cover;
-  }
-  .bg-center {
-    background-position: center;
-  }
-  .bg-no-repeat {
-    background-repeat: no-repeat;
+  .bg-white {
+    background-color: var(--color-white);
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
@@ -525,6 +545,18 @@
   .\[-ms-overflow-style\:none\] {
     -ms-overflow-style: none;
   }
+  .\[animation-delay\:0\.5s\] {
+    animation-delay: 0.5s;
+  }
+  .\[animation-delay\:1s\] {
+    animation-delay: 1s;
+  }
+  .\[animation-delay\:150ms\] {
+    animation-delay: 150ms;
+  }
+  .\[animation-delay\:300ms\] {
+    animation-delay: 300ms;
+  }
   .focus-within\:outline-1:focus-within {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
@@ -572,9 +604,6 @@
     }
     .md\:max-w-200 {
       max-width: calc(var(--spacing) * 200);
-    }
-    .md\:bg-\[url\(\.\.\/images\/bg-today-large\.svg\)\] {
-      background-image: url(../images/bg-today-large.svg);
     }
     .md\:p-8 {
       padding: calc(var(--spacing) * 8);
@@ -904,6 +933,11 @@
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
 }
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
