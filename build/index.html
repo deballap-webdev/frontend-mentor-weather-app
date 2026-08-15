@@ -95,7 +95,6 @@
               class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
               id="searchInput"
               autocomplete="off"
-              disabled
             />
           </div>
 
@@ -421,7 +420,7 @@
           Retry
         </button>
       </section>
-      <p class="text-2xl font-semibold mt-10 hidden">No search result found!</p>
+      <p class="text-2xl font-semibold mt-10 hidden" id="noMatch"></p>
       <p id="confirmation" class="-left-10000" aria-live="assertive"></p>
     </main>
   </body>

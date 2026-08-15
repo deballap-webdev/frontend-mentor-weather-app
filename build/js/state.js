@@ -1,9 +1,7 @@
-import { buildIcon, clearElem, createElem, show, hide } from "./Utilities.js";
+/* import { buildIcon, clearElem, createElem, show, hide } from "./Utilities.js";
 
 export const apiErrorDisplay = (text) => {
-  const errorDisplay = document.getElementById("errorDisplay");
-  const mainApp = document.getElementById("mainApp");
-  const apiError = document.getElementById("apiError");
+ 
   apiError.textContent = text;
   show(errorDisplay);
   hide(mainApp);
@@ -17,11 +15,19 @@ const retrySearch = () => {
 };
 
 export const noMatchFound = () => {
-  const forecastSection = document.getElementById("forecastSection");
-  const noMatch = document.getElementById("noMatch");
   hide(forecastSection);
   show(noMatch);
 };
+
+export const showSearching = () => {
+const searching = document.getElementById('searching');
+show(searching)
+}
+
+export const hideSearching = () => {
+const searching = document.getElementById('searching');
+hide(searching)
+}
 
 export const toggleViewForResearch = () => {
   const forecastSection = document.getElementById("forecastSection");
@@ -29,3 +35,4 @@ export const toggleViewForResearch = () => {
   show(forecastSection);
   hide(noMatch);
 };
+ */

@@ -1,5 +1,5 @@
 import { getWeatherDetails } from "./dataFunctions.js";
-import { clearElem, hide } from "./Utilities.js";
+import { clearElem, hide, show } from "./Utilities.js";
 import {
   createCurrentDetailsDivs,
   createCurrentWeatherDivs,
@@ -54,6 +54,15 @@ const renderDailyWeather = (weatherJson, dailyUnits) => {
   dailyWeatherArray.forEach((div) => {
     dailyWeather.append(div);
   });
+};
+
+export const errorDisplay = (text) => {
+  const errorDisplay = document.getElementById("errorDisplay");
+  const mainApp = document.getElementById("mainApp");
+  const apiError = document.getElementById("apiError");
+  apiError.textContent = text;
+  show(errorDisplay);
+  hide(mainApp);
 };
 
 const renderCurrentWeather = (weatherJson, locationObj, currentUnits) => {

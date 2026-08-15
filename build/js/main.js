@@ -15,12 +15,13 @@ import {
   dropDownDisplay,
   updateDisplay,
   renderHourlyWeather,
+  errorDisplay,
 } from "./domFunctions.js";
-import {
+/* import {
   apiErrorDisplay,
   toggleViewForResearch,
   noMatchFound,
-} from "./state.js";
+} from "./state.js"; */
 import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToogle.js";
 import { hide, show } from "./Utilities.js";
 import Location from "./Location.js";
@@ -62,7 +63,7 @@ const getGeolocation = async () => {
   if (navigator.geolocation) {
     await navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
   } else {
-    return geoError();
+    geoError();
   }
 };
 
@@ -82,20 +83,30 @@ const geoSuccess = async (positionObj) => {
   updateDataAndDisplay();
 };
 
-const geoError = () => {
+const geoError = (errObj) => {
   const errMsg = errObj ? errObj.message : "Geolocation not supported";
+  const forecastSection = document.getElementById("forecastSection");
+  const noMatch = document.getElementById("noMatch");
+  noMatch.textContent = errMsg;
+  hide(forecastSection);
+  show(noMatch);
+  return;
 };
 
 const submitLocation = async (event) => {
   event.preventDefault();
-  const searching = document.getElementById("searching");
-  show(searching);
   const searchText = event.currentTarget
     .querySelector("#searchInput")
     .value.trim();
   if (!searchText) return;
+  const searching = document.getElementById("searching");
+  show(searching);
   const coordsJson = await getCoordsFromApi(searchText);
-  if (handleError(coordsJson)) return;
+  if (handleError(coordsJson, "coordsApi")) {
+    hide(searching);
+    return;
+  }
+
   const coordsObj = {
     lat: coordsJson.results[0].latitude,
     lon: coordsJson.results[0].longitude,
@@ -106,22 +117,31 @@ const submitLocation = async (event) => {
 };
 
 const handleError = (apiData, apiType) => {
-  /* if (!apiData) {
-    apiErrorDisplay("No Internet Connection");
+  const forecastSection = document.getElementById("forecastSection");
+  const noMatch = document.getElementById("noMatch");
+  const searching = document.getElementById("searching");
+
+  if (!apiData) {
+    errorDisplay("No Internet Connection");
     return true;
   } else {
     if (apiData.error) {
       apiData.reason
-        ? apiErrorDisplay(apiData.reason)
-        : apiErrorDisplay(apiData.error);
+        ? errorDisplay(apiData.reason)
+        : errorDisplay(apiData.error);
       return true;
-    } else if (apiType === "forecastApi" && !apiData.results) {
-      noMatchFound()
+    } else if (!apiData.results && apiType === "coordsApi") {
+      noMatch.textContent = "No search result found!";
+      hide(forecastSection);
+      show(noMatch);
+      console.log(apiType);
       return true;
+    } else {
+      show(forecastSection);
+      hide(noMatch);
     }
   }
-
-  return false; */
+  return false;
 };
 
 const updateUnitAndDisplay = (event) => {
@@ -152,7 +172,11 @@ const updateUnitAndDisplay = (event) => {
 const updateDataAndDisplay = async () => {
   const searching = document.getElementById("searching");
   const weatherJson = await getWeatherFromApi(currentLocation);
-  if (handleError(weatherJson, "forecastApi")) return;
+  console.log(weatherJson);
+  if (handleError(weatherJson)) {
+    hide(searching);
+    return;
+  }
   storeWeatherJson(weatherJson);
   const date = `${new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -165,7 +189,6 @@ const updateDataAndDisplay = async () => {
     filteredHourlyJson,
     convertedValues,
   );
-  document.querySelector('[type="search"]').removeAttribute("disabled");
   hide(searching);
 };
 
