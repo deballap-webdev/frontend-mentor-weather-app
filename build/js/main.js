@@ -16,6 +16,7 @@ import {
   updateDisplay,
   renderHourlyWeather,
   errorDisplay,
+  buildSuggestions,
 } from "./domFunctions.js";
 /* import {
   apiErrorDisplay,
@@ -29,6 +30,7 @@ import Location from "./Location.js";
 const currentLocation = new Location();
 const initApp = () => {
   //Add Listeners
+  const suggestionBox = document.getElementById("suggestionBox");
   const retryBtn = document.getElementById("retry");
   const daysContainer = document.getElementById("daysContainer");
   const unitBtn = document.getElementById("toggleUnit");
@@ -37,6 +39,8 @@ const initApp = () => {
   const searchForm = document.getElementById("searchForm");
   const unitsDropDown = document.getElementById("unitsDropDown");
   const daysDropDown = document.getElementById("daysDropDown");
+  const searchInput = searchForm.querySelector("#searchInput");
+  searchInput.addEventListener("input", handleSearchSuggestion);
   unitBtn.addEventListener("click", dropDownDisplay);
   unitContainer.addEventListener("focusout", (event) => {
     dropDownDisplay(event, unitBtn);
@@ -45,6 +49,7 @@ const initApp = () => {
   daysContainer.addEventListener("focusout", (event) => {
     dropDownDisplay(event, dayButton);
   });
+  // suggestionBox.addEventListener("click");
   searchForm.addEventListener("submit", submitLocation);
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
   daysDropDown.addEventListener("click", handleDayToggle);
@@ -59,6 +64,21 @@ const loadThePage = async (event) => {
   })}`;
   switchDayBtnDisplay(date);
   switchUnitBtnDisplay(currentLocation);
+};
+
+const handleSearchSuggestion = async (event) => {
+  const suggestionBox = document.getElementById("suggestionBox");
+  const searchText = event.target.value;
+  if (!searchText.trim()) return;
+  const suggestionData = await getCoordsFromApi(searchText);
+  if (!suggestionData.results) {
+    hide(suggestionBox);
+    return;
+  }
+  const suggestedLocations = suggestionData.results.map((result) => {
+    return generateName(result);
+  });
+  buildSuggestions(suggestedLocations);
 };
 
 const getGeolocation = async () => {
@@ -113,6 +133,8 @@ const submitLocation = async (event) => {
 };
 
 const search = async (searchText) => {
+  const suggestionBox = document.getElementById("suggestionBox");
+  hide(suggestionBox);
   const searching = document.getElementById("searching");
   show(searching);
   const coordsJson = await getCoordsFromApi(searchText);

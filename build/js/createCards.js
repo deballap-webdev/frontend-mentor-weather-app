@@ -1,5 +1,11 @@
 import { getWeatherDetails } from "./dataFunctions.js";
-import { createCard, buildIcon, createElem } from "./Utilities.js";
+import {
+  createCard,
+  buildIcon,
+  createElem,
+  clearElem,
+  show,
+} from "./Utilities.js";
 export const createCurrentWeatherDivs = (
   locationObj,
   weatherJson,

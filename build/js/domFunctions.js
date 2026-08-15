@@ -56,6 +56,18 @@ const renderDailyWeather = (weatherJson, dailyUnits) => {
   });
 };
 
+export const buildSuggestions = (suggestedLocations) => {
+  const suggestionBox = document.getElementById("suggestionBox");
+  clearElem(suggestionBox);
+  suggestedLocations.forEach((location) => {
+    const button = document.createElement("button");
+    button.textContent = location;
+    button.classList.add("searchSuggestion");
+    suggestionBox.append(button);
+  });
+  show(suggestionBox);
+};
+
 export const errorDisplay = (text) => {
   const errorDisplay = document.getElementById("errorDisplay");
   const mainApp = document.getElementById("mainApp");
