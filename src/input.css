@@ -62,6 +62,10 @@
   }
 }
 
+.searchSuggestion {
+  @apply hover:cursor-pointer flex justify-between min-w-12 min-h-12 text-left hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
+}
+
 @theme {
   /*|| COLORS */
   --color-BGCOLOR: rgb(2, 1, 43);
