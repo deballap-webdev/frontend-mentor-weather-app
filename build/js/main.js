@@ -22,7 +22,7 @@ import {
   toggleViewForResearch,
   noMatchFound,
 } from "./state.js"; */
-import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToogle.js";
+import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToggle.js";
 import { hide, show } from "./Utilities.js";
 import Location from "./Location.js";
 
