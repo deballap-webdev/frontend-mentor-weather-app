@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="images/favicon-32x32.png" />
-    <!--<script src="js/main.js" type="module"></script>-->
+    <script src="js/main.js" type="module"></script>
     <title>front-end mentor's weather app challenge</title>
   </head>
   <body
@@ -72,10 +72,9 @@
         <p class="text-6xl my-12 text-center font-HEADER-FONT" id="headerDesc">
           How's the Sky Looking today?
         </p>
-
         <form
           role="search"
-          class="flex flex-wrap flex-row mx-auto gap-4 w-[min(100%,600px)] lg:w-175"
+          class="flex flex-wrap flex-row mx-auto relative gap-4 w-[min(100%,600px)] lg:w-175"
           id="searchForm"
         >
           <div
@@ -96,6 +95,7 @@
               class="w-[calc(100%-45px)] py-3 focus:outline-none hover:cursor-pointer"
               id="searchInput"
               autocomplete="off"
+              disabled
             />
           </div>
 
@@ -107,6 +107,19 @@
           >
             Search
           </button>
+          <div
+            id="searching"
+            class="bg-CONTAINER-BGCOLOR py-3 border absolute border-BORDER-COLOR hidden rounded-lg items-center 570:grow px-4 w-[min(100%,400px)] lg:w-135 min-h-48px focus-within:outline-white focus-within:outline-1 570:w-full -bottom-16"
+          >
+            <img
+              src="images/icon-loading.svg"
+              alt="loading icon"
+              width="16"
+              height="16"
+              class="mr-2"
+            />
+            Search in Progress
+          </div>
         </form>
 
         <section id="forecastSection" class="w-full">

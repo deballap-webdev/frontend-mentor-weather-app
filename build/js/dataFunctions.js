@@ -249,7 +249,7 @@ const convertWind = (wind, apiUnit, currentUnit) => {
     "kmh-mph": () => {
       return wind * 1.60934;
     },
-    "inch-mm": () => {
+    "mph-kmh": () => {
       return wind / 1.60934;
     },
     default: () => {

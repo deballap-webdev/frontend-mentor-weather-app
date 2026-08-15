@@ -20,9 +20,9 @@ import {
   apiErrorDisplay,
   toggleViewForResearch,
   noMatchFound,
-} from "./apiErrorFunctions.js";
+} from "./state.js";
 import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToogle.js";
-
+import { hide, show } from "./Utilities.js";
 import Location from "./Location.js";
 
 const currentLocation = new Location();
@@ -35,7 +35,6 @@ const initApp = () => {
   const searchForm = document.getElementById("searchForm");
   const unitsDropDown = document.getElementById("unitsDropDown");
   const daysDropDown = document.getElementById("daysDropDown");
-
   unitBtn.addEventListener("click", dropDownDisplay);
   unitContainer.addEventListener("focusout", (event) => {
     dropDownDisplay(event, unitBtn);
@@ -47,7 +46,6 @@ const initApp = () => {
   searchForm.addEventListener("submit", submitLocation);
   unitsDropDown.addEventListener("click", updateUnitAndDisplay);
   daysDropDown.addEventListener("click", handleDayToggle);
-
   loadThePage();
 };
 
@@ -90,6 +88,8 @@ const geoError = () => {
 
 const submitLocation = async (event) => {
   event.preventDefault();
+  const searching = document.getElementById("searching");
+  show(searching);
   const searchText = event.currentTarget
     .querySelector("#searchInput")
     .value.trim();
@@ -103,7 +103,6 @@ const submitLocation = async (event) => {
   };
   currentLocation.setLocation(coordsObj);
   updateDataAndDisplay();
-  toggleViewForResearch();
 };
 
 const handleError = (apiData, apiType) => {
@@ -151,6 +150,7 @@ const updateUnitAndDisplay = (event) => {
 };
 
 const updateDataAndDisplay = async () => {
+  const searching = document.getElementById("searching");
   const weatherJson = await getWeatherFromApi(currentLocation);
   if (handleError(weatherJson, "forecastApi")) return;
   storeWeatherJson(weatherJson);
@@ -165,6 +165,8 @@ const updateDataAndDisplay = async () => {
     filteredHourlyJson,
     convertedValues,
   );
+  document.querySelector('[type="search"]').removeAttribute("disabled");
+  hide(searching);
 };
 
 const handleDayToggle = (event) => {

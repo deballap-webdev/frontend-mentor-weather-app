@@ -58,6 +58,8 @@ const renderDailyWeather = (weatherJson, dailyUnits) => {
 
 const renderCurrentWeather = (weatherJson, locationObj, currentUnits) => {
   const currentWeather = document.getElementById("currentWeather");
+  currentWeather.className =
+    "p-4 h-71.5 mb-4 bg-blue-500 bg-[url(../images/bg-today-small.svg)] md:bg-[url(../images/bg-today-large.svg)] bg-center bg-cover bg-no-repeat flex flex-wrap justify-between items-center rounded-3xl md:max-w-200";
   clearElem(currentWeather);
   const currentWeatherArray = createCurrentWeatherDivs(
     locationObj,
