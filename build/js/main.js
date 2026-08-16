@@ -53,7 +53,7 @@ const initApp = () => {
     dropDownDisplay(event, dayButton);
   });
   daysContainer.addEventListener("keydown", (event) => {
-    dropDownDisplay(event, unitBtn);
+    dropDownDisplay(event, dayButton);
   });
   suggestionBox.addEventListener("click", searchTheSuggestion);
   searchForm.addEventListener("submit", submitLocation);

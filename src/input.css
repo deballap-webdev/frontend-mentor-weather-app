@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 .current-card {
-  @apply bg-CONTAINER-BGCOLOR border flex flex-col justify-between border-solid border-LIGHT-BORDER-COLOR rounded-lg p-6 h-30 w-40 md:w-47 mt-2 grow;
+  @apply bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR mt-2 flex h-30 w-40 grow flex-col justify-between rounded-lg border border-solid p-6 md:w-47;
 }
 
 .daily-card {
-  @apply w-25 bg-CONTAINER-BGCOLOR p-2 flex flex-col rounded-lg border border-LIGHT-BORDER-COLOR items-center;
+  @apply bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR flex w-25 flex-col items-center rounded-lg border p-2;
   & > .temp {
-    @apply flex justify-between w-full;
+    @apply flex w-full justify-between;
   }
   img {
     @apply w-fit;
@@ -15,9 +15,9 @@
 }
 
 .hourly-card {
-  @apply flex items-center justify-between mb-4 p-2 bg-LIGHT-BGCOLOR rounded-lg border border-solid border-LIGHT-BORDER-COLOR;
+  @apply bg-LIGHT-BGCOLOR border-LIGHT-BORDER-COLOR mb-4 flex items-center justify-between rounded-lg border border-solid p-2;
   & > .icon-time {
-    @apply w-25 flex items-center;
+    @apply flex w-25 items-center;
     img {
       @apply w-10;
     }
@@ -43,27 +43,27 @@
 }
 
 .units-drop-down {
-  @apply flex-col gap-1 bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR border border-solid w-60 rounded-lg p-2 top-15 shadow-2xl/70 absolute z-20;
+  @apply bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR absolute top-15 z-20 w-60 flex-col gap-1 rounded-lg border border-solid p-2 shadow-2xl/70;
   .unit {
-    @apply flex text-left justify-between min-w-12 min-h-12 hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
+    @apply hover:bg-LIGHT-BGCOLOR flex min-h-12 min-w-12 justify-between rounded-lg p-2 text-left;
   }
   .header {
-    @apply p-2 border-t-LIGHT-BORDER-COLOR border-t text-FADED-COLOR;
+    @apply border-t-LIGHT-BORDER-COLOR text-FADED-COLOR border-t p-2;
   }
   .switchBtn {
-    @apply text-left min-w-12 min-h-12 hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
+    @apply hover:bg-LIGHT-BGCOLOR min-h-12 min-w-12 rounded-lg p-2 text-left;
   }
 }
 
 .days-drop-down {
-  @apply flex-col gap-1  bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR border border-solid w-60 rounded-lg p-2 top-13 shadow-2xl/70 absolute z-20;
+  @apply bg-CONTAINER-BGCOLOR border-LIGHT-BORDER-COLOR absolute top-13 z-20 w-60 flex-col gap-1 rounded-lg border border-solid p-2 shadow-2xl/70;
   & > .day {
-    @apply hover:cursor-pointer flex justify-between min-w-12 min-h-12 text-left  hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
+    @apply hover:bg-LIGHT-BGCOLOR flex min-h-12 min-w-12 justify-between rounded-lg p-2 text-left hover:cursor-pointer;
   }
 }
 
 .searchSuggestion {
-  @apply hover:cursor-pointer flex justify-between min-w-12 min-h-12 text-left hover:bg-LIGHT-BGCOLOR p-2 rounded-lg;
+  @apply hover:bg-LIGHT-BGCOLOR flex min-h-12 min-w-12 justify-between rounded-lg p-2 text-left hover:cursor-pointer;
 }
 
 @theme {
@@ -75,7 +75,8 @@
   --color-BORDER-COLOR: rgb(36, 35, 67);
   --color-LIGHT-BORDER-COLOR: rgb(60, 60, 90);
   --color-FADED-COLOR: rgb(132, 134, 154);
-  /*|| FONT */
+  --color-SEARCHBTN-HOVER-COLOR: rgb(44, 27, 157);
+  --color-SEARCHBTN-BORDER-COLOR: rgb(77, 91, 198); /*|| FONT */
   --text-FS: 18px;
   --font-HEADER-FONT: "Bricolage Grotesque", sans-serif;
   --font-FONT-FAM: "DM Sans", sans-serif;
