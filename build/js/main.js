@@ -137,14 +137,14 @@ const geoError = (errObj) => {
 
 const submitLocation = async (event) => {
   event.preventDefault();
-  document.querySelectorAll(".disabled").forEach((item) => {
-    item.setAttribute("disabled", "");
-    item.ariaDisabled = "true";
-  });
   const searchText = event.currentTarget
     .querySelector("#searchInput")
     .value.trim();
   if (!searchText) return;
+  document.querySelectorAll(".disabled").forEach((item) => {
+    item.setAttribute("disabled", "");
+    item.ariaDisabled = "true";
+  });
   sessionStorage.setItem("lastSearch", searchText);
   search(searchText);
 };
