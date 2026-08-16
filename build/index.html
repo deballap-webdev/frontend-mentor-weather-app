@@ -134,7 +134,7 @@
 
         <section id="forecastSection" class="w-full">
           <a
-            href="#dailyHeader"
+            href="#currentHeader"
             class="absolute -top-9999 focus:top-4 focus:left-4 rounded-lg focus:bg-white focus:text-neutral-700 p-2"
             >Skip to Current Weather</a
           >
@@ -437,7 +437,11 @@
         </button>
       </section>
       <p class="text-2xl font-semibold mt-10 hidden" id="noMatch"></p>
-      <p id="confirmation" class="-left-10000" aria-live="assertive"></p>
+      <p
+        id="confirmation"
+        class="-left-10000 absolute"
+        aria-live="assertive"
+      ></p>
     </main>
   </body>
 </html>

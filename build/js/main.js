@@ -17,12 +17,8 @@ import {
   renderHourlyWeather,
   errorDisplay,
   buildSuggestions,
+  updateScreenReaderConfirmation,
 } from "./domFunctions.js";
-/* import {
-  apiErrorDisplay,
-  toggleViewForResearch,
-  noMatchFound,
-} from "./state.js"; */
 import { switchDayBtnDisplay, switchUnitBtnDisplay } from "./sessionToggle.js";
 import { hide, show } from "./Utilities.js";
 import Location from "./Location.js";
@@ -276,6 +272,7 @@ const handleDayToggle = (event) => {
   switchDayBtnDisplay(date);
   const convertedValues = convertBtwUnits(currentLocation, date);
   renderHourlyWeather(filteredHourlyJson, convertedValues.hourly);
+  updateScreenReaderConfirmation(`changed  hourly forecast day to ${date}`);
 };
 
 document.addEventListener("DOMContentLoaded", initApp);

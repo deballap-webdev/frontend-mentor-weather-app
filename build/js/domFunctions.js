@@ -29,6 +29,10 @@ const hideDropDown = (elem) => {
   elem.ariaExpanded = "false";
 };
 
+export const updateScreenReaderConfirmation = (message) => {
+  document.getElementById("confirmation").textContent = message;
+};
+
 export const updateDisplay = (
   weatherJson,
   locationObj,
@@ -44,7 +48,9 @@ export const updateDisplay = (
   renderDailyWeather(weatherJson, convertedUnitsObj.daily);
   renderHourlyWeather(hourlyJson, convertedUnitsObj.hourly);
   updateDescriptonText(weatherJson.current.weather_code);
-  setFocusOnSearch();
+  updateScreenReaderConfirmation(
+    `${weatherJson.current.temperature_2m} ${locationObj.getTemp()}, ${weatherJson.current.wind_speed_10m} ${locationObj.getWind()} wind speed and ${weatherJson.current.precipitation} ${locationObj.getPrecipt()} precipitation in ${locationObj.getName()}`,
+  );
 };
 
 const renderDailyWeather = (weatherJson, dailyUnits) => {
@@ -75,6 +81,7 @@ export const errorDisplay = (text) => {
   apiError.textContent = text;
   show(errorDisplay);
   hide(mainApp);
+  updateScreenReaderConfirmation(text);
 };
 
 const renderCurrentWeather = (weatherJson, locationObj, currentUnits) => {
