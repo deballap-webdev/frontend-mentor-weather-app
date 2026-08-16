@@ -7,18 +7,27 @@ import {
   createDailyDivs,
 } from "./createCards.js";
 export const dropDownDisplay = (event, elemToHide) => {
-  if (event.type === "click") {
-    event.currentTarget
-      .querySelector('img[data-dropDown="true"]')
-      .classList.toggle("rotate-180");
-    event.currentTarget.nextElementSibling.classList.toggle("hidden");
-    event.currentTarget.nextElementSibling.classList.toggle("flex");
-    event.target.ariaExpanded =
-      event.target.ariaExpanded === "true" ? "false" : "true";
-  } else {
-    if (event.currentTarget.contains(event.relatedTarget)) return;
-    setTimeout(hideDropDown, 300, elemToHide);
-  }
+  const key = event.type;
+  const keyLookup = {
+    click: () => {
+      event.currentTarget
+        .querySelector('img[data-dropDown="true"]')
+        .classList.toggle("rotate-180");
+      event.currentTarget.nextElementSibling.classList.toggle("hidden");
+      event.currentTarget.nextElementSibling.classList.toggle("flex");
+      event.target.ariaExpanded =
+        event.target.ariaExpanded === "true" ? "false" : "true";
+    },
+    keydown: () => {
+      if (event.key === "Escape") setTimeout(hideDropDown, 300, elemToHide);
+    },
+    focusout: () => {
+      if (event.currentTarget.contains(event.relatedTarget)) return;
+      setTimeout(hideDropDown, 300, elemToHide);
+    },
+  };
+  const action = keyLookup[key];
+  action();
 };
 
 const hideDropDown = (elem) => {

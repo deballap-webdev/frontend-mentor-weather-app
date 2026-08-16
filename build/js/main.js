@@ -41,9 +41,19 @@ const initApp = () => {
   unitContainer.addEventListener("focusout", (event) => {
     dropDownDisplay(event, unitBtn);
   });
+  searchForm.addEventListener("focusout", (event) => {
+    if (event.currentTarget.contains(event.relatedTarget)) return;
+    hide(suggestionBox);
+  });
+  unitContainer.addEventListener("keydown", (event) => {
+    dropDownDisplay(event, unitBtn);
+  });
   dayButton.addEventListener("click", dropDownDisplay);
   daysContainer.addEventListener("focusout", (event) => {
     dropDownDisplay(event, dayButton);
+  });
+  daysContainer.addEventListener("keydown", (event) => {
+    dropDownDisplay(event, unitBtn);
   });
   suggestionBox.addEventListener("click", searchTheSuggestion);
   searchForm.addEventListener("submit", submitLocation);
