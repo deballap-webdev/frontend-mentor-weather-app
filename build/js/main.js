@@ -204,13 +204,19 @@ const retrySearch = () => {
   const lastSearch = sessionStorage.getItem("lastSearch");
   const errorDisplay = document.getElementById("errorDisplay");
   const mainApp = document.getElementById("mainApp");
-  if (!typeof lastSearch === "string") return;
-  const lastSearchData = JSON.parse(lastSearchData);
-  if (typeof lastSearchData === "string") {
-    search(lastSearchData);
-  } else if (typeof lastSearchData === "object") {
-    updateDataAndDisplay;
+  if (typeof lastSearch !== "string") return;
+  try {
+    const lastSearchData = JSON.parse(lastSearchData);
+    if (typeof lastSearchData === "string") {
+      search(lastSearchData);
+    } else if (typeof lastSearchData === "object" && lastSearchData !== null) {
+      updateDataAndDisplay();
+    }
+  } catch (err) {
+    console.error(err.stack);
+    return;
   }
+
   hide(errorDisplay);
   show(mainApp);
 };

@@ -19,10 +19,9 @@ export const dropDownDisplay = (event, elemToHide) => {
         event.target.ariaExpanded === "true" ? "false" : "true";
     },
     keydown: () => {
-      if (event.key === "Escape") {
-        setTimeout(hideDropDown, 300, elemToHide);
-        event.currentTarget.querySelector(".toggle").focus();
-      }
+      if (event.key !== "Escape") return;
+      setTimeout(hideDropDown, 300, elemToHide);
+      event.currentTarget.querySelector(".toggle").focus();
     },
     focusout: () => {
       if (event.currentTarget.contains(event.relatedTarget)) return;
