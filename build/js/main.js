@@ -204,12 +204,12 @@ const retrySearch = () => {
   const lastSearch = sessionStorage.getItem("lastSearch");
   const errorDisplay = document.getElementById("errorDisplay");
   const mainApp = document.getElementById("mainApp");
-  if (lastSearch) {
-    if (typeof lastSearch === "object") {
-      updateDataAndDisplay();
-    } else if (typeof lastSearch === "string") {
-      search(lastSearch);
-    }
+  if (!typeof lastSearch === "string") return;
+  const lastSearchData = JSON.parse(lastSearchData);
+  if (typeof lastSearchData === "string") {
+    search(lastSearchData);
+  } else if (typeof lastSearchData === "object") {
+    updateDataAndDisplay;
   }
   hide(errorDisplay);
   show(mainApp);
