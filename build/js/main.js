@@ -124,6 +124,7 @@ const geoError = (errObj) => {
   show(noMatch);
   document.querySelectorAll(".disabled").forEach((item) => {
     item.removeAttribute("disabled");
+    item.ariaDisabled = "false";
   });
   return;
 };
@@ -132,6 +133,7 @@ const submitLocation = async (event) => {
   event.preventDefault();
   document.querySelectorAll(".disabled").forEach((item) => {
     item.setAttribute("disabled", "");
+    item.ariaDisabled = "true";
   });
   const searchText = event.currentTarget
     .querySelector("#searchInput")
@@ -151,6 +153,7 @@ const search = async (searchText) => {
     hide(searching);
     document.querySelectorAll(".disabled").forEach((item) => {
       item.removeAttribute("disabled");
+      item.ariaDisabled = "false";
     });
     return;
   }
@@ -238,6 +241,7 @@ const updateDataAndDisplay = async () => {
     hide(searching);
     document.querySelectorAll(".disabled").forEach((item) => {
       item.removeAttribute("disabled");
+      item.ariaDisabled = "false";
     });
     return;
   }
@@ -256,6 +260,7 @@ const updateDataAndDisplay = async () => {
   hide(searching);
   document.querySelectorAll(".disabled").forEach((item) => {
     item.removeAttribute("disabled");
+    item.ariaDisabled = "false";
   });
 };
 
