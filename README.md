@@ -1,7 +1,6 @@
 # Frontend Mentor - Weather App Solution
 
-This is my solution to the [Weather App challenge](https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49) on Frontend Mentor.
-
+This is my solution to the [Weather App challenge](https://www.frontendmentor.io/solutions/responsive-weather-app-built-with-vanilla-javascript-jmCSDdVjX_) on Frontend Mentor.
 I built this project with vanilla JavaScript to practice working with APIs, asynchronous JavaScript, application state, DOM manipulation, caching, error handling, responsive design, and modular code.
 
 ## Table of Contents
